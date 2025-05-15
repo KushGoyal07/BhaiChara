@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BrightPath</title>
+  <style>
+    :root {
+      --primary: #2c3e50;
+      --accent: #3498db;
+      --light: #ecf0f1;
+      --dark: #34495e;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 40px 20px;
+      font-family: 'Helvetica Neue', sans-serif;
+      background-color: var(--light);
+      color: var(--primary);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 30px;
+      font-weight: 700;
+      color: var(--dark);
+    }
+    section {
+      width: 100%;
+      max-width: 1100px;
+      margin-bottom: 50px;
+    }
+    section h2 {
+      font-size: 1.8em;
+      margin-bottom: 20px;
+      color: var(--accent);
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 5px;
+    }
+    .video-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+    .video-wrapper {
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: transform 0.2s ease;
+    }
+    .video-wrapper:hover {
+      transform: translateY(-5px);
+    }
+    iframe {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border: none;
+      display: block;
+      border-radius: 12px;
+    }
+    @media (min-width: 768px) {
+      .video-list {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (min-width: 1024px) {
+      .video-list {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    .footer {
+      margin-top: 50px;
+      font-size: 0.9em;
+      color: var(--dark);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>BHAICHARA ON TOP</h1>
+
+  <section>
+    <h2>PSLP</h2>
+    <div class="video-list" id="pslpList"></div>
+  </section>
+
+  <section>
+    <h2>CNS</h2>
+    <div class="video-list" id="cnsList"></div>
+  </section>
+
+  <section>
+    <h2>DBMS</h2>
+    <div class="video-list" id="dbmsList"></div>
+  </section>
+
+  <section>
+    <h2>JAVA</h2>
+    <div class="video-list" id="javaList"></div>
+  </section>
+
+  <section>
+    <h2>TOC</h2>
+    <div class="video-list" id="tocList"></div>
+  </section>
+
+  <div class="footer">&copy; 2025 My Video Gallery. All rights reserved.</div>
+
+  <script>
+    const sections = {
+      pslp: [
+        "https://youtu.be/aRvyN1omlhc?feature=shared",
+        "https://youtu.be/M7lc1UVf-VE",
+        "https://youtu.be/DQhxgvR--xI?feature=shared",
+        "https://www.youtube.com/watch?v=6JCLY0Rlx6Q"
+      ],
+      cns: [
+        "https://youtu.be/DQhxgvR--xI?feature=shared",
+        "https://www.youtube.com/watch?v=6JCLY0Rlx6Q"
+      ],
+      dbms: [
+        "https://youtu.be/9bZkp7q19f0",
+        "https://www.youtube.com/watch?v=RgKAFK5djSk"
+      ],
+      java: [
+        "https://youtu.be/4RJT4v0SRDU?feature=shared",
+        "https://youtu.be/fXvF8dKHqK0"
+      ],
+      toc: [
+        "https://www.youtube.com/watch?v=VYOjWnS4cMY",
+        "https://youtu.be/eVTXPUF4Oz4"
+      ],
+    };
+
+    function extractVideoId(url) {
+      const regex = /(?:youtube\.com\/(?:.*[?&]v=)|youtu\.be\/)([\w-]{11})/;
+      const match = url.match(regex);
+      return match ? match[1] : null;
+    }
+
+    function renderVideos(containerId, videoUrls) {
+      const container = document.getElementById(containerId);
+      videoUrls.forEach(url => {
+        const id = extractVideoId(url);
+        if (!id) return;
+
+        const wrapper = document.createElement("div");
+        wrapper.className = "video-wrapper";
+
+        const iframe = document.createElement("iframe");
+        iframe.src = `https://www.youtube.com/embed/${id}`;
+        iframe.allowFullscreen = true;
+
+        wrapper.appendChild(iframe);
+        container.appendChild(wrapper);
+      });
+    }
+
+    renderVideos("pslpList", sections.pslp);
+    renderVideos("cnsList", sections.cns);
+    renderVideos("dbmsList", sections.dbms);
+    renderVideos("javaList", sections.java);
+    renderVideos("tocList", sections.toc);
+  </script>
+</body
