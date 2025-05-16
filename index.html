@@ -4,13 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>BrightPath</title>
-  <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
   <style>
     :root {
       --primary: #2c3e50;
-      --accent: #3498db;
-      --light: #ecf0f1;
-      --dark: #34495e;
+      --accent: #ff385c;
+      --light: #f7f7f7;
+      --dark: #484848;
+      --card-bg: #fff;
     }
     * {
       box-sizing: border-box;
@@ -24,67 +24,154 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      min-height: 100vh;
     }
     h1 {
-      font-size: 2.5em;
-      margin-bottom: 30px;
+      font-size: 2.8em;
+      margin-bottom: 40px;
       font-weight: 700;
       color: var(--dark);
+      letter-spacing: 2px;
     }
     section {
       width: 100%;
-      max-width: 1100px;
-      margin-bottom: 50px;
+      max-width: 1200px;
+      margin-bottom: 60px;
     }
     section h2 {
-      font-size: 1.8em;
-      margin-bottom: 20px;
+      font-size: 2em;
+      margin-bottom: 24px;
       color: var(--accent);
-      border-bottom: 2px solid var(--accent);
-      padding-bottom: 5px;
+      border-bottom: 3px solid var(--accent);
+      padding-bottom: 8px;
+      font-weight: 600;
     }
     .video-list {
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 30px;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 20px;
+    }
+    @media (min-width: 600px) {
+      .video-list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+      }
+    }
+    @media (min-width: 900px) {
+      .video-list {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 28px;
+      }
+    }
+    @media (min-width: 1200px) {
+      .video-list {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 30px;
+      }
     }
     .video-wrapper {
-      background-color: #fff;
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      background-color: var(--card-bg);
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
       overflow: hidden;
-      transition: transform 0.2s ease;
+      transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
     }
     .video-wrapper:hover {
-      transform: translateY(-5px);
+      transform: translateY(-8px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
     }
     iframe {
       width: 100%;
       aspect-ratio: 16 / 9;
       border: none;
       display: block;
-      border-radius: 12px;
+      border-radius: 16px 16px 0 0;
     }
-    @media (min-width: 768px) {
-      .video-list {
-        grid-template-columns: repeat(2, 1fr);
-      }
+    .video-link {
+      text-align: center;
+      padding: 12px 0;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid #eee;
+      transition: color 0.3s ease;
     }
-    @media (min-width: 1024px) {
-      .video-list {
-        grid-template-columns: repeat(3, 1fr);
-      }
+    .video-link:hover {
+      color: #e0224d;
+    }
+    .notes-container {
+      padding: 12px 20px 20px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .notes-title {
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--dark);
+      font-size: 1rem;
+    }
+    .note-list {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+      flex-grow: 1;
+      overflow-y: auto;
+    }
+    .note-list li {
+      margin-bottom: 8px;
+    }
+    .note-list a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s ease;
+    }
+    .note-list a:hover {
+      color: #e0224d;
+      text-decoration: underline;
+    }
+    .search-container {
+      width: 100%;
+      max-width: 1200px;
+      margin-bottom: 40px;
+      display: flex;
+      justify-content: center;
+    }
+    #searchInput {
+      width: 100%;
+      max-width: 480px;
+      padding: 12px 16px;
+      font-size: 1.1rem;
+      border-radius: 9999px;
+      border: 2px solid var(--accent);
+      box-shadow: 0 2px 8px rgba(255, 56, 92, 0.3);
+      outline-offset: 2px;
+      transition: box-shadow 0.3s ease;
+    }
+    #searchInput:focus {
+      box-shadow: 0 4px 12px rgba(255, 56, 92, 0.6);
+      border-color: #e0224d;
     }
     .footer {
-      margin-top: 50px;
+      margin-top: auto;
       font-size: 0.9em;
       color: var(--dark);
       text-align: center;
+      padding: 20px 0 10px;
+      user-select: none;
     }
   </style>
 </head>
 <body>
   <h1>BHAICHARA ON TOP</h1>
+
+  <div class="search-container">
+    <input type="search" id="searchInput" placeholder="Search videos by name..." aria-label="Search videos by name" />
+  </div>
 
   <section>
     <h2>PSLP</h2>
@@ -114,23 +201,48 @@
   <div class="footer">&copy; 2025 BhaiChara PVT LTD. All rights reserved.</div>
 
   <script>
+    // Your data goes here. Add or remove videos easily by adding {title, videoUrl, notes?}
     const sections = {
       pslp: [
-        "https://youtu.be/aRvyN1omlhc?feature=shared",
-        "https://www.xnxx.com/video-mavy9ab/horny_huge_natural_tits_mature_fucking_her_y._lover"
+        {
+          title: "PSLP Introduction",
+          videoUrl: "https://youtu.be/aRvyN1omlhc?feature=shared",
+          notes: [
+            { name: "PSLP Notes - Chapter 1", url: "https://docs.google.com/document/d/your-doc-id-1" },
+            { name: "PSLP Summary", url: "https://drive.google.com/file/d/your-file-id-1/view" }
+          ]
+        },
+        // Add more videos here, just title and videoUrl required:
+        // { title: "Another PSLP Video", videoUrl: "https://youtu.be/XXXXXXX" }
       ],
       cns: [
-        "https://youtu.be/DQhxgvR--xI?feature=shared"
+        {
+          title: "CNS Basics",
+          videoUrl: "https://youtu.be/DQhxgvR--xI?feature=shared",
+          notes: [{ name: "CNS Lecture Notes", url: "https://docs.google.com/document/d/your-doc-id-2" }]
+        }
       ],
       dbms: [
-        "https://youtu.be/ScWOVJAMMe8?feature=shared"
+        {
+          title: "DBMS Concepts",
+          videoUrl: "https://youtu.be/ScWOVJAMMe8?feature=shared",
+          notes: [{ name: "DBMS Notes", url: "https://docs.google.com/document/d/your-doc-id-3" }]
+        }
       ],
       java: [
-        "https://youtu.be/4RJT4v0SRDU?feature=shared"
+        {
+          title: "Java Basics",
+          videoUrl: "https://youtu.be/4RJT4v0SRDU?feature=shared",
+          notes: [{ name: "Java Basics Notes", url: "https://docs.google.com/document/d/your-doc-id-4" }]
+        }
       ],
       toc: [
-        "https://youtu.be/nEX9A_uoCx8?feature=shared"
-      ],
+        {
+          title: "Theory of Computation",
+          videoUrl: "https://youtu.be/nEX9A_uoCx8?feature=shared",
+          notes: [{ name: "TOC Notes", url: "https://docs.google.com/document/d/your-doc-id-5" }]
+        }
+      ]
     };
 
     function extractVideoId(url) {
@@ -139,28 +251,90 @@
       return match ? match[1] : null;
     }
 
-    function renderVideos(containerId, videoUrls) {
-      const container = document.getElementById(containerId);
-      videoUrls.forEach(url => {
-        const id = extractVideoId(url);
-        if (!id) return;
+    function createVideoCard(videoObj) {
+      const videoId = extractVideoId(videoObj.videoUrl);
+      if (!videoId) return null;
 
-        const wrapper = document.createElement("div");
-        wrapper.className = "video-wrapper";
+      const wrapper = document.createElement("div");
+      wrapper.className = "video-wrapper";
 
-        const iframe = document.createElement("iframe");
-        iframe.src = `https://www.youtube.com/embed/${id}`;
-        iframe.allowFullscreen = true;
+      const iframe = document.createElement("iframe");
+      iframe.src = `https://www.youtube.com/embed/${videoId}`;
+      iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+      iframe.allowFullscreen = true;
+      iframe.title = videoObj.title;
 
-        wrapper.appendChild(iframe);
-        container.appendChild(wrapper);
-      });
+      const ytLink = document.createElement("a");
+      ytLink.href = videoObj.videoUrl;
+      ytLink.className = "video-link";
+      ytLink.target = "_blank";
+      ytLink.rel = "noopener noreferrer";
+      ytLink.textContent = videoObj.title;
+
+      wrapper.appendChild(iframe);
+      wrapper.appendChild(ytLink);
+
+      // Only add notes if notes array exists and has items
+      if (Array.isArray(videoObj.notes) && videoObj.notes.length > 0) {
+        const notesContainer = document.createElement("div");
+        notesContainer.className = "notes-container";
+
+        const notesTitle = document.createElement("div");
+        notesTitle.className = "notes-title";
+        notesTitle.textContent = "Notes:";
+
+        const noteList = document.createElement("ul");
+        noteList.className = "note-list";
+
+        videoObj.notes.forEach(note => {
+          const li = document.createElement("li");
+          const a = document.createElement("a");
+          a.href = note.url;
+          a.target = "_blank";
+          a.rel = "noopener noreferrer";
+          a.textContent = note.name;
+          li.appendChild(a);
+          noteList.appendChild(li);
+        });
+
+        notesContainer.appendChild(notesTitle);
+        notesContainer.appendChild(noteList);
+        wrapper.appendChild(notesContainer);
+      }
+
+      return wrapper;
     }
 
-    renderVideos("pslpList", sections.pslp);
-    renderVideos("cnsList", sections.cns);
-    renderVideos("dbmsList", sections.dbms);
-    renderVideos("javaList", sections.java);
-    renderVideos("tocList", sections.toc);
+    function renderVideos(data) {
+      for (const sectionKey in data) {
+        const container = document.getElementById(sectionKey + "List");
+        container.innerHTML = "";
+
+        data[sectionKey].forEach(videoObj => {
+          const card = createVideoCard(videoObj);
+          if (card) container.appendChild(card);
+        });
+      }
+    }
+
+    renderVideos(sections);
+
+    // Search by video title, case insensitive
+    document.getElementById("searchInput").addEventListener("input", e => {
+      const term = e.target.value.toLowerCase().trim();
+      if (!term) {
+        renderVideos(sections);
+        return;
+      }
+
+      const filtered = {};
+      for (const sectionKey in sections) {
+        filtered[sectionKey] = sections[sectionKey].filter(videoObj =>
+          videoObj.title.toLowerCase().includes(term)
+        );
+      }
+      renderVideos(filtered);
+    });
   </script>
-</body
+</body>
+</html>
