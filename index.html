@@ -11,28 +11,137 @@
       --light: #f7f7f7;
       --dark: #484848;
       --card-bg: #fff;
+
+      --bg-color: var(--light);
+      --text-color: var(--primary);
+      --nav-bg: #fff;
+      --nav-text: var(--primary);
+      --search-border: var(--accent);
+      --search-shadow: rgba(255, 56, 92, 0.3);
+    }
+    [data-theme="dark"] {
+      --bg-color: #121212;
+      --text-color: #eee;
+      --nav-bg: #1f1f1f;
+      --nav-text: #ff385c;
+      --search-border: #ff385c;
+      --search-shadow: rgba(255, 56, 92, 0.6);
+      --card-bg: #1f1f1f;
+      --accent: #ff385c;
+      --dark: #ddd;
     }
     * {
       box-sizing: border-box;
     }
     body {
       margin: 0;
-      padding: 40px 20px;
+      padding: 0 20px 40px;
       font-family: 'Helvetica Neue', sans-serif;
-      background-color: var(--light);
-      color: var(--primary);
+      background-color: var(--bg-color);
+      color: var(--text-color);
       display: flex;
       flex-direction: column;
       align-items: center;
       min-height: 100vh;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
+
+    /* NAVBAR */
+    nav {
+      width: 100%;
+      max-width: 1200px;
+      background-color: var(--nav-bg);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      margin-bottom: 40px;
+      border-radius: 12px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .nav-title {
+      font-weight: 700;
+      font-size: 1.8rem;
+      color: var(--nav-text);
+      letter-spacing: 2px;
+      user-select: none;
+    }
+    .nav-search {
+      flex-grow: 1;
+      margin: 0 24px;
+    }
+    .nav-search input {
+      width: 100%;
+      max-width: 480px;
+      padding: 10px 16px;
+      font-size: 1.1rem;
+      border-radius: 9999px;
+      border: 2px solid var(--search-border);
+      box-shadow: 0 2px 8px var(--search-shadow);
+      outline-offset: 2px;
+      transition: box-shadow 0.3s ease, border-color 0.3s ease;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      border: 2px solid var(--search-border);
+    }
+    .nav-search input::placeholder {
+      color: var(--text-color);
+      opacity: 0.6;
+    }
+    .nav-search input:focus {
+      box-shadow: 0 4px 12px var(--search-shadow);
+      border-color: #e0224d;
+    }
+
+    /* Toggle Switch */
+    .toggle-switch {
+      position: relative;
+      width: 50px;
+      height: 26px;
+    }
+    .toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #ccc;
+      border-radius: 34px;
+      transition: 0.4s;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 20px;
+      width: 20px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      border-radius: 50%;
+      transition: 0.4s;
+    }
+    input:checked + .slider {
+      background-color: var(--accent);
+    }
+    input:checked + .slider:before {
+      transform: translateX(24px);
+    }
+
+    /* Page Title */
     h1 {
       font-size: 2.8em;
       margin-bottom: 40px;
       font-weight: 700;
       color: var(--dark);
       letter-spacing: 2px;
+      user-select: none;
     }
+
+    /* Sections */
     section {
       width: 100%;
       max-width: 1200px;
@@ -46,6 +155,8 @@
       padding-bottom: 8px;
       font-weight: 600;
     }
+
+    /* Video grid */
     .video-list {
       display: grid;
       grid-template-columns: repeat(1, 1fr);
@@ -69,6 +180,8 @@
         gap: 30px;
       }
     }
+
+    /* Video cards */
     .video-wrapper {
       background-color: var(--card-bg);
       border-radius: 16px;
@@ -88,6 +201,7 @@
       border: none;
       display: block;
       border-radius: 16px 16px 0 0;
+      background: black;
     }
     .video-link {
       text-align: center;
@@ -98,10 +212,13 @@
       text-decoration: none;
       border-bottom: 1px solid #eee;
       transition: color 0.3s ease;
+      user-select: text;
     }
     .video-link:hover {
       color: #e0224d;
     }
+
+    /* Notes container */
     .notes-container {
       padding: 12px 20px 20px;
       flex-grow: 1;
@@ -134,28 +251,8 @@
       color: #e0224d;
       text-decoration: underline;
     }
-    .search-container {
-      width: 100%;
-      max-width: 1200px;
-      margin-bottom: 40px;
-      display: flex;
-      justify-content: center;
-    }
-    #searchInput {
-      width: 100%;
-      max-width: 480px;
-      padding: 12px 16px;
-      font-size: 1.1rem;
-      border-radius: 9999px;
-      border: 2px solid var(--accent);
-      box-shadow: 0 2px 8px rgba(255, 56, 92, 0.3);
-      outline-offset: 2px;
-      transition: box-shadow 0.3s ease;
-    }
-    #searchInput:focus {
-      box-shadow: 0 4px 12px rgba(255, 56, 92, 0.6);
-      border-color: #e0224d;
-    }
+
+    /* Footer */
     .footer {
       margin-top: auto;
       font-size: 0.9em;
@@ -164,15 +261,67 @@
       padding: 20px 0 10px;
       user-select: none;
     }
+
+    /* Completed section */
+    .completed-section {
+      max-width: 1200px;
+      width: 100%;
+      margin-bottom: 60px;
+      background-color: var(--card-bg);
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+      padding: 24px 30px;
+      user-select: none;
+    }
+    .completed-section h2 {
+      color: var(--accent);
+      margin-bottom: 24px;
+      font-weight: 600;
+    }
+    .progress-bar-container {
+      background-color: #eee;
+      border-radius: 12px;
+      overflow: hidden;
+      height: 18px;
+      margin: 12px 0 24px;
+    }
+    [data-theme="dark"] .progress-bar-container {
+      background-color: #333;
+    }
+    .progress-bar {
+      height: 100%;
+      background-color: var(--accent);
+      width: 0;
+      transition: width 0.6s ease;
+    }
+    .course-progress {
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--dark);
+      font-size: 1rem;
+    }
   </style>
 </head>
 <body>
-  <h1>BHAICHARA ON TOP</h1>
 
-  <div class="search-container">
-    <input type="search" id="searchInput" placeholder="Search videos by name..." aria-label="Search videos by name" />
-  </div>
+  <nav>
+    <div class="nav-title">BHAICHARA ON TOP</div>
+    <div class="nav-search">
+      <input type="search" id="searchInput" placeholder="Search videos by name..." aria-label="Search videos by name" />
+    </div>
+    <label class="toggle-switch" title="Toggle dark mode">
+      <input type="checkbox" id="modeToggle" aria-label="Toggle dark mode" />
+      <span class="slider"></span>
+    </label>
+  </nav>
 
+  <!-- Completed Videos & Progress Section -->
+  <section class="completed-section" aria-label="Completed videos and progress">
+    <h2>Course Completion</h2>
+    <div id="completionStats"></div>
+  </section>
+
+  <!-- Video Sections -->
   <section>
     <h2>PSLP</h2>
     <div class="video-list" id="pslpList"></div>
@@ -200,221 +349,208 @@
 
   <div class="footer">&copy; 2025 BhaiChara Pvt Ltd. All rights reserved.</div>
 
-  <script>
-    // Your data goes here. Add or remove videos easily by adding {title, videoUrl, notes?}
-    const sections = {
-      pslp: [
-        {
-          title: "PSLP UNIT - 1",
-          videoUrl: "https://youtu.be/aRvyN1omlhc?feature=shared",
-          notes: [
-            { name: "PSLP UNIT NOTES - 1", url: "https://docs.google.com/document/d/your-doc-id-1" }
-          ]
-        },
-        {
-          title: "PSLP UNIT - 2",
-          videoUrl: "https://youtu.be/aRvyN1omlhc?feature=shared",
-          notes: [
-            { name: "PSLP UNIT NOTES - 2", url: "https://docs.google.com/document/d/your-doc-id-1" }
-          ]
-        },
-        {
-          title: "PSLP UNIT - 3",
-          videoUrl: "https://youtu.be/aRvyN1omlhc?feature=shared",
-          notes: [
-            { name: "PSLP UNIT NOTES - 3", url: "https://docs.google.com/document/d/your-doc-id-1" }
-          ]
-        },
-        {
-          title: "PSLP UNIT - 4",
-          videoUrl: "https://youtu.be/aRvyN1omlhc?feature=shared",
-          notes: [
-            { name: "PSLP UNIT NOTES - 4", url: "https://docs.google.com/document/d/your-doc-id-1" }
-          ]
-        },
-        // Add more videos here, just title and videoUrl required:
-        // { title: "Another PSLP Video", videoUrl: "https://youtu.be/XXXXXXX" }
-      ],
-      cns: [
-        {
-          title: "CNS UNIT - 1",
-          videoUrl: "https://youtu.be/DQhxgvR--xI?feature=shared",
-          notes: [{ name: "CNS UNIT NOTES - 1", url: "https://drive.google.com/file/d/1B3TyqEUOVXOQL4L4DWI_u5YjWR-F3sqN/view?usp=drivesdk" }]
-        },
-         {
-          title: "CNS UNIT - 2",
-          videoUrl: "https://youtu.be/DQhxgvR--xI?feature=shared",
-          notes: [{ name: "CNS UNIT NOTES - 2", url: "https://docs.google.com/document/d/your-doc-id-2" }]
-        },
-         {
-          title: "CNS UNIT - 3",
-          videoUrl: "https://youtu.be/DQhxgvR--xI?feature=shared",
-          notes: [{ name: "CNS UNIT NOTES - 3", url: "https://docs.google.com/document/d/your-doc-id-2" }]
-        },
-         {
-          title: "CNS UNIT - 4",
-          videoUrl: "https://youtu.be/DQhxgvR--xI?feature=shared",
-          notes: [{ name: "CNS UNIT NOTES - 4", url: "https://docs.google.com/document/d/your-doc-id-2" }]
-        }
-      ],
-      dbms: [
-        {
-          title: "DBMS UNIT - 1",
-          videoUrl: "https://youtu.be/ScWOVJAMMe8?feature=shared",
-          notes: [{ name: "DBMS UNIT NOTES - 1", url: "https://docs.google.com/document/d/your-doc-id-3" }]
-        },
-        {
-          title: "DBMS UNIT - 2",
-          videoUrl: "https://youtu.be/ScWOVJAMMe8?feature=shared",
-          notes: [{ name: "DBMS UNIT NOTES - 2", url: "https://docs.google.com/document/d/your-doc-id-3" }]
-        },
-        {
-          title: "DBMS UNIT - 3",
-          videoUrl: "https://youtu.be/ScWOVJAMMe8?feature=shared",
-          notes: [{ name: "DBMS UNIT NOTES - 3", url: "https://docs.google.com/document/d/your-doc-id-3" }]
-        },
-        {
-          title: "DBMS UNIT - 4",
-          videoUrl: "https://youtu.be/ScWOVJAMMe8?feature=shared",
-          notes: [{ name: "DBMS UNIT NOTES - 4", url: "https://docs.google.com/document/d/your-doc-id-3" }]
-        }
-      ],
-      java: [
-        {
-          title: "Java UNIT - 1",
-          videoUrl: "https://youtu.be/4RJT4v0SRDU?feature=shared",
-          notes: [{ name: "Java UNIT NOTES - 1", url: "https://docs.google.com/document/d/your-doc-id-4" }]
-        },
-        {
-          title: "Java UNIT - 2",
-          videoUrl: "https://youtu.be/vEv_uYr5Yqk?feature=shared",
-          notes: [{ name: "Java UNIT NOTES - 2", url: "https://docs.google.com/document/d/your-doc-id-4" }]
-        },
-        {
-          title: "Java UNIT - 3",
-          videoUrl: "https://youtu.be/vOTpZp7-_hM?feature=shared",
-          notes: [{ name: "Java UNIT NOTES - 3", url: "https://docs.google.com/document/d/your-doc-id-4" }]
-        },
-        {
-          title: "Java UNIT - 4",
-          videoUrl: "https://youtu.be/3XlTekglPek?feature=shared",
-          notes: [{ name: "Java UNIT NOTES - 4", url: "https://docs.google.com/document/d/your-doc-id-4" }]
-        }
-      ],
-      toc: [
-        {
-          title: "TOC UNIT - 1",
-          videoUrl: "https://youtu.be/nEX9A_uoCx8?feature=shared",
-          notes: [{ name: "TOC UNIT NOTES - 1", url: "https://docs.google.com/document/d/your-doc-id-5" }]
-        },
-        {
-          title: "TOC UNIT - 2",
-          videoUrl: "https://youtu.be/nEX9A_uoCx8?feature=shared",
-          notes: [{ name: "TOC UNIT NOTES - 2", url: "https://docs.google.com/document/d/your-doc-id-5" }]
-        },
-        {
-          title: "TOC UNIT - 3",
-          videoUrl: "https://youtu.be/nEX9A_uoCx8?feature=shared",
-          notes: [{ name: "TOC UNIT NOTES - 3", url: "https://docs.google.com/document/d/your-doc-id-5" }]
-        },
-        {
-          title: "TOC UNIT - 4",
-          videoUrl: "https://youtu.be/nEX9A_uoCx8?feature=shared",
-          notes: [{ name: "TOC UNIT NOTES - 4", url: "https://docs.google.com/document/d/your-doc-id-5" }]
-        }
-      ]
-    };
+<script>
+  // Data for videos, each has a `completed` boolean property to track completion
+  const sections = {
+    pslp: [
+      { title: "PSLP UNIT - 1", videoUrl: "https://youtu.be/aRvyN1omlhc?feature=shared", completed: false,
+        notes: [{ name: "PSLP UNIT NOTES - 1", url: "https://docs.google.com/document/d/your-doc-id-1" }] },
+      { title: "PSLP UNIT - 2", videoUrl: "https://youtu.be/aRvyN1omlhc?feature=shared", completed: false,
+        notes: [{ name: "PSLP UNIT NOTES - 2", url: "https://docs.google.com/document/d/your-doc-id-1" }] },
+      { title: "PSLP UNIT - 3", videoUrl: "https://youtu.be/aRvyN1omlhc?feature=shared", completed: false,
+        notes: [{ name: "PSLP UNIT NOTES - 3", url: "https://docs.google.com/document/d/your-doc-id-1" }] },
+      { title: "PSLP UNIT - 4", videoUrl: "https://youtu.be/aRvyN1omlhc?feature=shared", completed: false,
+        notes: [{ name: "PSLP UNIT NOTES - 4", url: "https://docs.google.com/document/d/your-doc-id-1" }] }
+    ],
+    cns: [
+      { title: "CNS UNIT - 1", videoUrl: "https://youtu.be/DQhxgvR--xI?feature=shared", completed: false,
+        notes: [{ name: "CNS UNIT NOTES - 1", url: "https://drive.google.com/file/d/1B3TyqEUOVXOQL4L4DWI_u5YjWR-F3sqN/view?usp=drivesdk" }] },
+      { title: "CNS UNIT - 2", videoUrl: "https://youtu.be/DQhxgvR--xI?feature=shared", completed: false,
+        notes: [{ name: "CNS UNIT NOTES - 2", url: "https://docs.google.com/document/d/your-doc-id-2" }] },
+      { title: "CNS UNIT - 3", videoUrl: "https://youtu.be/DQhxgvR--xI?feature=shared", completed: false,
+        notes: [{ name: "CNS UNIT NOTES - 3", url: "https://docs.google.com/document/d/your-doc-id-2" }] },
+      { title: "CNS UNIT - 4", videoUrl: "https://youtu.be/DQhxgvR--xI?feature=shared", completed: false,
+        notes: [{ name: "CNS UNIT NOTES - 4", url: "https://docs.google.com/document/d/your-doc-id-2" }] }
+    ],
+    dbms: [
+      { title: "DBMS UNIT - 1", videoUrl: "https://youtu.be/FO1xi9fkSD8?feature=shared", completed: false,
+        notes: [{ name: "DBMS UNIT NOTES - 1", url: "https://docs.google.com/document/d/your-doc-id-3" }] },
+      { title: "DBMS UNIT - 2", videoUrl: "https://youtu.be/FO1xi9fkSD8?feature=shared", completed: false,
+        notes: [{ name: "DBMS UNIT NOTES - 2", url: "https://docs.google.com/document/d/your-doc-id-3" }] },
+      { title: "DBMS UNIT - 3", videoUrl: "https://youtu.be/FO1xi9fkSD8?feature=shared", completed: false,
+        notes: [{ name: "DBMS UNIT NOTES - 3", url: "https://docs.google.com/document/d/your-doc-id-3" }] },
+      { title: "DBMS UNIT - 4", videoUrl: "https://youtu.be/FO1xi9fkSD8?feature=shared", completed: false,
+        notes: [{ name: "DBMS UNIT NOTES - 4", url: "https://docs.google.com/document/d/your-doc-id-3" }] }
+    ],
+    java: [
+      { title: "JAVA UNIT - 1", videoUrl: "https://youtu.be/jguwqF09S_0?feature=shared", completed: false,
+        notes: [{ name: "JAVA UNIT NOTES - 1", url: "https://docs.google.com/document/d/your-doc-id-4" }] },
+      { title: "JAVA UNIT - 2", videoUrl: "https://youtu.be/jguwqF09S_0?feature=shared", completed: false,
+        notes: [{ name: "JAVA UNIT NOTES - 2", url: "https://docs.google.com/document/d/your-doc-id-4" }] },
+      { title: "JAVA UNIT - 3", videoUrl: "https://youtu.be/jguwqF09S_0?feature=shared", completed: false,
+        notes: [{ name: "JAVA UNIT NOTES - 3", url: "https://docs.google.com/document/d/your-doc-id-4" }] },
+      { title: "JAVA UNIT - 4", videoUrl: "https://youtu.be/jguwqF09S_0?feature=shared", completed: false,
+        notes: [{ name: "JAVA UNIT NOTES - 4", url: "https://docs.google.com/document/d/your-doc-id-4" }] }
+    ],
+    toc: [
+      { title: "TOC UNIT - 1", videoUrl: "https://youtu.be/IHxlqk7mxMI?feature=shared", completed: false,
+        notes: [{ name: "TOC UNIT NOTES - 1", url: "https://docs.google.com/document/d/your-doc-id-5" }] },
+      { title: "TOC UNIT - 2", videoUrl: "https://youtu.be/IHxlqk7mxMI?feature=shared", completed: false,
+        notes: [{ name: "TOC UNIT NOTES - 2", url: "https://docs.google.com/document/d/your-doc-id-5" }] },
+      { title: "TOC UNIT - 3", videoUrl: "https://youtu.be/IHxlqk7mxMI?feature=shared", completed: false,
+        notes: [{ name: "TOC UNIT NOTES - 3", url: "https://docs.google.com/document/d/your-doc-id-5" }] },
+      { title: "TOC UNIT - 4", videoUrl: "https://youtu.be/IHxlqk7mxMI?feature=shared", completed: false,
+        notes: [{ name: "TOC UNIT NOTES - 4", url: "https://docs.google.com/document/d/your-doc-id-5" }] }
+    ],
+  };
 
-    function extractVideoId(url) {
-      const regex = /(?:youtube\.com\/(?:.*[?&]v=)|youtu\.be\/)([\w-]{11})/;
-      const match = url.match(regex);
-      return match ? match[1] : null;
+  // Render videos to container elements
+  function renderVideos() {
+    for (const [key, videos] of Object.entries(sections)) {
+      const container = document.getElementById(key + "List");
+      container.innerHTML = "";
+      videos.forEach((video, i) => {
+        const videoEl = document.createElement("div");
+        videoEl.className = "video-wrapper";
+        videoEl.dataset.title = video.title.toLowerCase();
+
+        videoEl.innerHTML = `
+          <iframe
+            src="${video.videoUrl.replace("youtu.be/", "www.youtube.com/embed/").replace("?feature=shared", "")}"
+            allowfullscreen
+            loading="lazy"
+            title="${video.title}"
+          ></iframe>
+          <a href="${video.videoUrl}" target="_blank" rel="noopener" class="video-link">${video.title}</a>
+          <div class="notes-container">
+            <div class="notes-title">Notes:</div>
+            <ul class="note-list">
+              ${video.notes.map(note => `<li><a href="${note.url}" target="_blank" rel="noopener">${note.name}</a></li>`).join('')}
+            </ul>
+          </div>
+          <label style="padding:10px 16px; font-weight:600; cursor:pointer; color: var(--accent); user-select:none;">
+            <input type="checkbox" data-section="${key}" data-index="${i}" ${video.completed ? "checked" : ""} /> Mark as completed
+          </label>
+        `;
+        container.appendChild(videoEl);
+      });
     }
+  }
 
-    function createVideoCard(videoObj) {
-      const videoId = extractVideoId(videoObj.videoUrl);
-      if (!videoId) return null;
-
-      const wrapper = document.createElement("div");
-      wrapper.className = "video-wrapper";
-
-      const iframe = document.createElement("iframe");
-      iframe.src = `https://www.youtube.com/embed/${videoId}`;
-      iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-      iframe.allowFullscreen = true;
-      iframe.title = videoObj.title;
-
-      const ytLink = document.createElement("a");
-      ytLink.href = videoObj.videoUrl;
-      ytLink.className = "video-link";
-      ytLink.target = "_blank";
-      ytLink.rel = "noopener noreferrer";
-      ytLink.textContent = videoObj.title;
-
-      wrapper.appendChild(iframe);
-      wrapper.appendChild(ytLink);
-
-      // Only add notes if notes array exists and has items
-      if (Array.isArray(videoObj.notes) && videoObj.notes.length > 0) {
-        const notesContainer = document.createElement("div");
-        notesContainer.className = "notes-container";
-
-        const notesTitle = document.createElement("div");
-        notesTitle.className = "notes-title";
-        notesTitle.textContent = "Notes:";
-
-        const noteList = document.createElement("ul");
-        noteList.className = "note-list";
-
-        videoObj.notes.forEach(note => {
-          const li = document.createElement("li");
-          const a = document.createElement("a");
-          a.href = note.url;
-          a.target = "_blank";
-          a.rel = "noopener noreferrer";
-          a.textContent = note.name;
-          li.appendChild(a);
-          noteList.appendChild(li);
-        });
-
-        notesContainer.appendChild(notesTitle);
-        notesContainer.appendChild(noteList);
-        wrapper.appendChild(notesContainer);
-      }
-
-      return wrapper;
+  // Filter videos by search term
+  function filterVideos(searchTerm) {
+    const term = searchTerm.toLowerCase();
+    for (const [key, videos] of Object.entries(sections)) {
+      const container = document.getElementById(key + "List");
+      Array.from(container.children).forEach(videoEl => {
+        const title = videoEl.dataset.title || "";
+        videoEl.style.display = title.includes(term) ? "block" : "none";
+      });
     }
+  }
 
-    function renderVideos(data) {
-      for (const sectionKey in data) {
-        const container = document.getElementById(sectionKey + "List");
-        container.innerHTML = "";
+  // Calculate and render completion stats and progress bars
+  function updateCompletionStats() {
+    const completionContainer = document.getElementById("completionStats");
+    completionContainer.innerHTML = "";
 
-        data[sectionKey].forEach(videoObj => {
-          const card = createVideoCard(videoObj);
-          if (card) container.appendChild(card);
-        });
+    for (const [key, videos] of Object.entries(sections)) {
+      const completedCount = videos.filter(v => v.completed).length;
+      const total = videos.length;
+      const percentage = total === 0 ? 0 : Math.round((completedCount / total) * 100);
+
+      const sectionTitle = key.toUpperCase();
+
+      const sectionDiv = document.createElement("div");
+      sectionDiv.className = "course-progress";
+
+      sectionDiv.innerHTML = `
+        <div>${sectionTitle}: ${completedCount} / ${total} videos completed (${percentage}%)</div>
+        <div class="progress-bar-container" aria-label="${sectionTitle} progress bar">
+          <div class="progress-bar" style="width:${percentage}%;"></div>
+        </div>
+      `;
+
+      completionContainer.appendChild(sectionDiv);
+    }
+  }
+
+  // Save completed state to localStorage
+  function saveCompleted() {
+    localStorage.setItem("videoCompletion", JSON.stringify(sections));
+  }
+
+  // Load completed state from localStorage
+  function loadCompleted() {
+    const saved = localStorage.getItem("videoCompletion");
+    if (saved) {
+      const savedData = JSON.parse(saved);
+      for (const [key, videos] of Object.entries(savedData)) {
+        if (sections[key]) {
+          sections[key].forEach((video, i) => {
+            if (typeof videos[i]?.completed === "boolean") {
+              video.completed = videos[i].completed;
+            }
+          });
+        }
       }
     }
+  }
 
-    renderVideos(sections);
+  // Initialize Dark/Light mode based on localStorage or system preference
+  function initTheme() {
+    const toggle = document.getElementById("modeToggle");
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) {
+      document.documentElement.setAttribute("data-theme", savedTheme);
+      toggle.checked = savedTheme === "dark";
+    } else {
+      // Default to system preference
+      const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+      document.documentElement.setAttribute("data-theme", prefersDark ? "dark" : "light");
+      toggle.checked = prefersDark;
+    }
+  }
 
-    // Search by video title, case insensitive
-    document.getElementById("searchInput").addEventListener("input", e => {
-      const term = e.target.value.toLowerCase().trim();
-      if (!term) {
-        renderVideos(sections);
-        return;
-      }
+  // Event Listeners Setup
+  document.addEventListener("DOMContentLoaded", () => {
+    loadCompleted();
+    renderVideos();
+    updateCompletionStats();
+    initTheme();
 
-      const filtered = {};
-      for (const sectionKey in sections) {
-        filtered[sectionKey] = sections[sectionKey].filter(videoObj =>
-          videoObj.title.toLowerCase().includes(term)
-        );
-      }
-      renderVideos(filtered);
+    // Search filter
+    const searchInput = document.getElementById("searchInput");
+    searchInput.addEventListener("input", (e) => {
+      filterVideos(e.target.value);
     });
-  </script>
+
+    // Toggle completed checkbox for videos
+    document.body.addEventListener("change", (e) => {
+      if (e.target.matches('input[type="checkbox"][data-section][data-index]')) {
+        const section = e.target.dataset.section;
+        const index = parseInt(e.target.dataset.index);
+        if (sections[section] && sections[section][index]) {
+          sections[section][index].completed = e.target.checked;
+          saveCompleted();
+          updateCompletionStats();
+        }
+      }
+    });
+
+    // Dark mode toggle
+    const modeToggle = document.getElementById("modeToggle");
+    modeToggle.addEventListener("change", () => {
+      if (modeToggle.checked) {
+        document.documentElement.setAttribute("data-theme", "dark");
+        localStorage.setItem("theme", "dark");
+      } else {
+        document.documentElement.setAttribute("data-theme", "light");
+        localStorage.setItem("theme", "light");
+      }
+    });
+  });
+</script>
+
 </body>
 </html>
