@@ -496,59 +496,112 @@
     // The `videoUrl` now directly contains the YouTube embed URL.
     // IMPORTANT: Replace these placeholder URLs with your actual YouTube video embed URLs.
     const sectionsData = {
-        pslp: [
-            { title: "PSLP UNIT - 1", videoUrl: "https://youtu.be/ScWOVJAMMe8?feature=shared3", completed: false,
-                notes: [{ name: "PSLP UNIT NOTES - 1", url: "https://docs.google.com/document/d/your-doc-id-1" }] },
-            { title: "PSLP UNIT - 2", videoUrl: "https://youtu.be/ScWOVJAMMe8?feature=shared4", completed: false,
-                notes: [{ name: "PSLP UNIT NOTES - 2", url: "https://docs.google.com/document/d/your-doc-id-1" }] },
-            { title: "PSLP UNIT - 3", videoUrl: "https://youtu.be/ScWOVJAMMe8?feature=shared5", completed: false,
-                notes: [{ name: "PSLP UNIT NOTES - 3", url: "https://docs.google.com/document/d/your-doc-id-1" }] },
-            { title: "PSLP UNIT - 3 (cont.)", videoUrl: "https://youtu.be/ScWOVJAMMe8?feature=shared6", completed: false,
-                notes: [{ name: "PSLP UNIT NOTES - 3", url: "https://docs.google.com/document/d/your-doc-id-1" }] },
-            { title: "PSLP UNIT - 4", videoUrl: "https://youtu.be/ScWOVJAMMe8?feature=shared7", completed: false,
-                notes: [{ name: "PSLP UNIT NOTES - 4", url: "https://docs.google.com/document/d/your-doc-id-1" }] }
-        ],
-        cns: [
-            { title: "CNS UNIT - 1", videoUrl: "https://youtu.be/ScWOVJAMMe8?feature=shared8", completed: false,
-                notes: [{ name: "CNS UNIT NOTES - 1", url: "https://drive.google.com/file/d/1B3TyqEUOVXOQL4L4DWI_u5YjWR-F3sqN/view?usp=drivesdk" }] },
-            { title: "CNS UNIT - 2", videoUrl: "https://youtu.be/ScWOVJAMMe8?feature=shared9", completed: false,
-                notes: [{ name: "CNS UNIT NOTES - 2", url: "https://docs.google.com/document/d/your-doc-id-2" }] },
-            { title: "CNS UNIT - 3", videoUrl: "https://youtu.be/mk9F0N6DnDk?feature=shared0", completed: false,
-                notes: [{ name: "CNS UNIT NOTES - 3", url: "https://docs.google.com/document/d/your-doc-id-2" }] },
-            { title: "CNS UNIT - 4", videoUrl: "https://youtu.be/mk9F0N6DnDk?feature=shared1", completed: false,
-                notes: [{ name: "CNS UNIT NOTES - 4", url: "https://docs.google.com/document/d/your-doc-id-2" }] }
-        ],
-        dbms: [
-            { title: "DBMS UNIT - 1", videoUrl: "https://youtu.be/mk9F0N6DnDk?feature=shared2", completed: false,
-                notes: [{ name: "DBMS UNIT NOTES - 1", url: "https://docs.google.com/document/d/your-doc-id-3" }] },
-            { title: "DBMS UNIT - 2", videoUrl: "https://youtu.be/mk9F0N6DnDk?feature=shared3", completed: false,
-                notes: [{ name: "DBMS UNIT NOTES - 2", url: "https://docs.google.com/document/d/your-doc-id-3" }] },
-            { title: "DBMS UNIT - 3", videoUrl: "https://youtu.be/mk9F0N6DnDk?feature=shared4", completed: false,
-                notes: [{ name: "DBMS UNIT NOTES - 3", url: "https://docs.google.com/document/d/your-doc-id-3" }] },
-            { title: "DBMS UNIT - 4", videoUrl: "https://youtu.be/mk9F0N6DnDk?feature=shared5", completed: false,
-                notes: [{ name: "DBMS UNIT NOTES - 4", url: "https://docs.google.com/document/d/your-doc-id-3" }] }
-        ],
-        java: [
-            { title: "JAVA UNIT - 1", videoUrl: "https://youtu.be/mk9F0N6DnDk?feature=shared6", completed: false,
-                notes: [{ name: "JAVA UNIT NOTES - 1", url: "https://docs.google.com/document/d/your-doc-id-4" }] },
-            { title: "JAVA UNIT - 2", videoUrl: "https://youtu.be/mk9F0N6DnDk?feature=shared7", completed: false,
-                notes: [{ name: "JAVA UNIT NOTES - 2", url: "https://docs.google.com/document/d/your-doc-id-4" }] },
-            { title: "JAVA UNIT - 3", videoUrl: "https://youtu.be/mk9F0N6DnDk?feature=shared8", completed: false,
-                notes: [{ name: "JAVA UNIT NOTES - 3", url: "https://docs.google.com/document/d/your-doc-id-4" }] },
-            { title: "JAVA UNIT - 4", videoUrl: "https://youtu.be/mk9F0N6DnDk?feature=shared9", completed: false,
-                notes: [{ name: "JAVA UNIT NOTES - 4", url: "https://docs.google.com/document/d/your-doc-id-4" }] }
-        ],
-        toc: [
-            { title: "TOC UNIT - 1", videoUrl: "https://youtu.be/FO1xi9fkSD8?feature=shared0", completed: false,
-                notes: [{ name: "TOC UNIT NOTES - 1", url: "https://docs.google.com/document/d/your-doc-id-5" }] },
-            { title: "TOC UNIT - 2", videoUrl: "https://youtu.be/FO1xi9fkSD8?feature=shared1", completed: false,
-                notes: [{ name: "TOC UNIT NOTES - 2", url: "https://docs.google.com/document/d/your-doc-id-5" }] },
-            { title: "TOC UNIT - 3", videoUrl: "https://youtu.be/FO1xi9fkSD8?feature=shared2", completed: false,
-                notes: [{ name: "TOC UNIT NOTES - 3", url: "https://docs.google.com/document/d/your-doc-id-5" }] },
-            { title: "TOC UNIT - 4", videoUrl: "https://youtu.be/FO1xi9fkSD8?feature=shared3", completed: false,
-                notes: [{ name: "TOC UNIT NOTES - 4", url: "https://docs.google.com/document/d/your-doc-id-5" }] }
-        ],
-    };
+
+    pslp: [
+
+      { title: "PSLP UNIT - 1", videoUrl: "https://youtu.be/aRvyN1omlhc?feature=shared", completed: false,
+
+        notes: [{ name: "PSLP UNIT NOTES - 1", url: "https://docs.google.com/document/d/your-doc-id-1" }] },
+
+      { title: "PSLP UNIT - 2", videoUrl: "https://youtu.be/olDzHZaKYDo?feature=shared", completed: false,
+
+        notes: [{ name: "PSLP UNIT NOTES - 2", url: "https://docs.google.com/document/d/your-doc-id-1" }] },
+
+      { title: "PSLP UNIT - 3", videoUrl: "https://youtu.be/niDbghcNdS8?feature=shared", completed: false,
+
+        notes: [{ name: "PSLP UNIT NOTES - 3", url: "https://docs.google.com/document/d/your-doc-id-1" }] },
+
+       { title: "PSLP UNIT - 3", videoUrl: "https://youtu.be/pwlnzSS2ILI?feature=shared", completed: false,
+
+        notes: [{ name: "PSLP UNIT NOTES - 3", url: "https://docs.google.com/document/d/your-doc-id-1" }] },
+
+      { title: "PSLP UNIT - 4", videoUrl: "https://youtu.be/IHxlqk7mxMI?feature=shared", completed: false,
+
+        notes: [{ name: "PSLP UNIT NOTES - 4", url: "https://docs.google.com/document/d/your-doc-id-1" }] }
+
+    ],
+
+    cns: [
+
+      { title: "CNS UNIT - 1", videoUrl: "https://youtu.be/DQhxgvR--xI?feature=shared", completed: false,
+
+        notes: [{ name: "CNS UNIT NOTES - 1", url: "https://drive.google.com/file/d/1B3TyqEUOVXOQL4L4DWI_u5YjWR-F3sqN/view?usp=drivesdk" }] },
+
+      { title: "CNS UNIT - 2", videoUrl: "https://youtu.be/Vtr4bHFXu40?feature=shared", completed: false,
+
+        notes: [{ name: "CNS UNIT NOTES - 2", url: "https://docs.google.com/document/d/your-doc-id-2" }] },
+
+      { title: "CNS UNIT - 3", videoUrl: "https://youtu.be/IHxlqk7mxMI?feature=shared", completed: false,
+
+        notes: [{ name: "CNS UNIT NOTES - 3", url: "https://docs.google.com/document/d/your-doc-id-2" }] },
+
+      { title: "CNS UNIT - 4", videoUrl: "https://youtu.be/IHxlqk7mxMI?feature=shared", completed: false,
+
+        notes: [{ name: "CNS UNIT NOTES - 4", url: "https://docs.google.com/document/d/your-doc-id-2" }] }
+
+    ],
+
+    dbms: [
+
+      { title: "DBMS UNIT - 1", videoUrl: "https://youtu.be/ScWOVJAMMe8?feature=shared", completed: false,
+
+        notes: [{ name: "DBMS UNIT NOTES - 1", url: "https://docs.google.com/document/d/your-doc-id-3" }] },
+
+      { title: "DBMS UNIT - 2", videoUrl: "https://youtu.be/mk9F0N6DnDk?feature=shared", completed: false,
+
+        notes: [{ name: "DBMS UNIT NOTES - 2", url: "https://docs.google.com/document/d/your-doc-id-3" }] },
+
+      { title: "DBMS UNIT - 3", videoUrl: "https://youtu.be/FO1xi9fkSD8?feature=shared", completed: false,
+
+        notes: [{ name: "DBMS UNIT NOTES - 3", url: "https://docs.google.com/document/d/your-doc-id-3" }] },
+
+      { title: "DBMS UNIT - 4", videoUrl: "https://youtu.be/FO1xi9fkSD8?feature=shared", completed: false,
+
+        notes: [{ name: "DBMS UNIT NOTES - 4", url: "https://docs.google.com/document/d/your-doc-id-3" }] }
+
+    ],
+
+    java: [
+
+      { title: "JAVA UNIT - 1", videoUrl: "https://youtu.be/4RJT4v0SRDU?feature=shared", completed: false,
+
+        notes: [{ name: "JAVA UNIT NOTES - 1", url: "https://docs.google.com/document/d/your-doc-id-4" }] },
+
+      { title: "JAVA UNIT - 2", videoUrl: "https://youtu.be/vEv_uYr5Yqk?feature=shared", completed: false,
+
+        notes: [{ name: "JAVA UNIT NOTES - 2", url: "https://docs.google.com/document/d/your-doc-id-4" }] },
+
+      { title: "JAVA UNIT - 3", videoUrl: "https://youtu.be/vOTpZp7-_hM?feature=shared", completed: false,
+
+        notes: [{ name: "JAVA UNIT NOTES - 3", url: "https://docs.google.com/document/d/your-doc-id-4" }] },
+
+      { title: "JAVA UNIT - 4", videoUrl: "https://youtu.be/3XlTekglPek?feature=shared", completed: false,
+
+        notes: [{ name: "JAVA UNIT NOTES - 4", url: "https://docs.google.com/document/d/your-doc-id-4" }] }
+
+    ],
+
+    toc: [
+
+      { title: "TOC UNIT - 1", videoUrl: "https://youtu.be/nEX9A_uoCx8?feature=shared", completed: false,
+
+        notes: [{ name: "TOC UNIT NOTES - 1", url: "https://docs.google.com/document/d/your-doc-id-5" }] },
+
+      { title: "TOC UNIT - 2", videoUrl: "https://youtu.be/WH8sAqcGEpI?feature=shared", completed: false,
+
+        notes: [{ name: "TOC UNIT NOTES - 2", url: "https://docs.google.com/document/d/your-doc-id-5" }] },
+
+      { title: "TOC UNIT - 3", videoUrl: "https://youtu.be/IHxlqk7mxMI?feature=shared", completed: false,
+
+        notes: [{ name: "TOC UNIT NOTES - 3", url: "https://docs.google.com/document/d/your-doc-id-5" }] },
+
+      { title: "TOC UNIT - 4", videoUrl: "https://youtu.be/IHxlqk7mxMI?feature=shared", completed: false,
+
+        notes: [{ name: "TOC UNIT NOTES - 4", url: "https://docs.google.com/document/d/your-doc-id-5" }] }
+
+    ],
+
+  };
 
     // Map of route names (from URL hash) to their section IDs and display titles.
     // dataKey refers to the key in the sectionsData object for video content.
