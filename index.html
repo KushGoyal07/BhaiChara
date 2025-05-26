@@ -279,6 +279,14 @@
         document.addEventListener("DOMContentLoaded", () => {
             initTheme(); // Set initial dark/light mode.
 
+            // --- NEW: Check if already authenticated on page load ---
+            const isAuthenticated = localStorage.getItem('isAuthenticated');
+            if (isAuthenticated === 'true') {
+                window.location.href = 'home.html#home'; // Redirect directly to home if logged in
+                return; // Stop further execution
+            }
+            // --- END NEW ---
+
             // Event listener for the dark mode toggle switch.
             const modeToggle = document.getElementById("modeToggle");
             if (modeToggle) {
@@ -305,12 +313,11 @@
                     const password = passwordInput.value;
 
                     // Simple hardcoded authentication for demonstration
-                    // In a real application, this would involve server-side authentication
-                    if (username === 'kush' && password === 'jinkinahichuchiunmenhiruchi') {
+                    if (username === 'kush' && password === 'goyal') {
                         localStorage.setItem('isAuthenticated', 'true'); // Set authentication flag
-                        showMessageBox('Login successful!', () => {
-                            window.location.href = 'home.html#home'; // Redirect to home page of main app
-                        });
+                        // --- MODIFIED: Redirect directly without message box for successful login ---
+                        window.location.href = 'home.html#home';
+                        // --- END MODIFIED ---
                     } else {
                         localStorage.setItem('isAuthenticated', 'false'); // Ensure flag is false
                         showMessageBox('Invalid username or password.');
