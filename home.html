@@ -162,6 +162,28 @@
             transform: translateX(27px); /* Adjusted translation for wider switch */
         }
 
+        /* Logout button */
+        #logoutButton {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            white-space: nowrap; /* Prevent text wrapping */
+        }
+
+        #logoutButton:hover {
+            background-color: #e0224d;
+            transform: translateY(-2px);
+        }
+        #logoutButton:active {
+            transform: translateY(0);
+        }
+
         /* Page Title */
         h1 {
             font-size: 2.6em; /* Slightly reduced font size for better balance */
@@ -369,6 +391,12 @@
                 order: 4;
                 margin-top: 10px;
             }
+            /* Logout button positioning for small screens */
+            #logoutButton {
+                order: 5; /* Place it after the toggle switch */
+                margin-top: 10px;
+                width: 100%;
+            }
         }
 
         /* Further adjustments for very small screens */
@@ -450,7 +478,7 @@
             <input type="checkbox" id="modeToggle" aria-label="Toggle dark mode" />
             <span class="slider"></span>
         </label>
-    </nav>
+        <button id="logoutButton">Logout</button> </nav>
 
     <h1 id="pageTitle"></h1>
 
@@ -758,6 +786,12 @@
         }
     }
 
+    // NEW: Logout Function
+    function logout() {
+        localStorage.removeItem('isAuthenticated'); // Remove the authentication flag
+        window.location.href = 'index.html'; // Redirect to the login page
+    }
+
     // Event Listeners Setup - executed once the DOM is fully loaded.
     document.addEventListener("DOMContentLoaded", () => {
         // Check authentication status FIRST
@@ -814,6 +848,12 @@
                     localStorage.setItem("theme", "light"); // Save theme preference.
                 }
             });
+        }
+
+        // NEW: Event listener for the logout button
+        const logoutButton = document.getElementById('logoutButton');
+        if (logoutButton) {
+            logoutButton.addEventListener('click', logout);
         }
     });
 </script>
