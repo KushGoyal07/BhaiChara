@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>BrightPath</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - BrightPath</title>
     <style>
         /* Define CSS variables for theme colors */
         :root {
@@ -12,127 +12,127 @@
             --light: #f7f7f7;
             --dark: #484848;
             --card-bg: #fff;
-            --border-color: #eee; /* Added for subtle borders */
+            --border-color: #eee;
 
             --bg-color: var(--light);
             --text-color: var(--primary);
-            --nav-bg: #fff;
-            --nav-text: var(--primary);
-            --search-border: var(--accent);
-            --search-shadow: rgba(255, 56, 92, 0.3);
+            --button-bg: var(--accent);
+            --button-hover-bg: #e0224d;
         }
         /* Dark theme variables */
         [data-theme="dark"] {
             --bg-color: #121212;
             --text-color: #eee;
-            --nav-bg: #1f1f1f;
-            --nav-text: #ff385c;
-            --search-border: #ff385c;
-            --search-shadow: rgba(255, 56, 92, 0.6);
             --card-bg: #1f1f1f;
-            --accent: #ff385c;
-            --dark: #ddd;
-            --border-color: #333; /* Dark theme border color */
+            --border-color: #333;
+            --button-bg: #ff385c;
+            --button-hover-bg: #e0224d;
         }
-        /* Universal box-sizing */
+
+        /* Universal box-sizing for consistent layout */
         * {
             box-sizing: border-box;
         }
-        /* Body styling */
+
+        /* Body styling for full page centering and theme transition */
         body {
             margin: 0;
-            padding: 0 20px 40px; /* Adjusted padding for better responsiveness */
+            padding: 20px; /* Responsive padding */
             font-family: 'Helvetica Neue', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
             display: flex;
             flex-direction: column;
             align-items: center; /* Center content horizontally */
-            min-height: 100vh;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            justify-content: center; /* Center content vertically */
+            min-height: 100vh; /* Ensure full viewport height */
+            transition: background-color 0.3s ease, color 0.3s ease; /* Smooth theme transition */
         }
 
-        /* NAVBAR */
-        nav {
-            width: 100%;
-            max-width: 1200px;
-            background-color: var(--nav-bg);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 15px 25px; /* Slightly increased padding */
-            margin-bottom: 40px;
-            border-radius: 12px;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.12);
-            transition: background-color 0.3s ease, color 0.3s ease;
-            flex-wrap: wrap; /* Allow wrapping on smaller screens */
-            gap: 15px; /* Increased space between nav items */
+        /* Login container styling for card-like appearance */
+        .login-container {
+            width: 100%; /* Full width on small screens */
+            max-width: 400px; /* Max width for larger screens */
+            background-color: var(--card-bg);
+            border-radius: 16px; /* Rounded corners */
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12); /* Subtle shadow */
+            padding: 40px; /* Internal padding */
+            border: 1px solid var(--border-color); /* Subtle border */
+            text-align: center;
         }
-        .nav-title {
+
+        /* Heading for the login form */
+        .login-container h2 {
+            font-size: 2.5em; /* Large, prominent heading */
+            color: var(--accent); /* Accent color */
+            margin-bottom: 30px;
             font-weight: 700;
-            font-size: 1.8rem;
-            color: var(--nav-text);
-            letter-spacing: 1.5px; /* Slightly adjusted letter spacing */
-            user-select: none;
-            text-decoration: none;
-            white-space: nowrap;
         }
-        .nav-links {
-            display: flex;
-            gap: 25px; /* Increased gap between links */
-            margin: 0 20px;
-            flex-wrap: wrap;
-            justify-content: center; /* Center links when wrapped */
-            flex-grow: 1; /* Allow links to take available space */
-        }
-        .nav-links a {
-            color: var(--nav-text);
-            text-decoration: none;
+
+        /* Label styling for form inputs */
+        .login-form label {
+            display: block; /* Each label on its own line */
+            margin-bottom: 8px;
             font-weight: 600;
-            font-size: 1.05rem; /* Slightly adjusted font size */
-            transition: color 0.3s ease;
-            white-space: nowrap;
-            padding: 5px 0; /* Added vertical padding for better touch targets */
+            color: var(--text-color);
+            text-align: left; /* Align text to the left */
         }
-        .nav-links a:hover {
-            color: var(--accent);
-        }
-        .nav-search {
-            flex-grow: 1;
-            margin: 0 24px;
-            min-width: 180px; /* Increased minimum width for search input */
-            max-width: 500px; /* Increased max-width for search input */
-        }
-        .nav-search input {
-            width: 100%;
-            padding: 10px 18px; /* Slightly increased padding */
-            font-size: 1.05rem; /* Adjusted font size */
-            border-radius: 9999px;
-            border: 2px solid var(--search-border);
-            box-shadow: 0 2px 8px var(--search-shadow);
-            outline-offset: 2px;
-            transition: box-shadow 0.3s ease, border-color 0.3s ease;
+
+        /* Input field styling */
+        .login-form input[type="text"],
+        .login-form input[type="password"] {
+            width: 100%; /* Full width within its container */
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1.1em;
             background-color: var(--bg-color);
             color: var(--text-color);
-        }
-        .nav-search input::placeholder {
-            color: var(--text-color);
-            opacity: 0.7; /* Slightly more visible placeholder */
-        }
-        .nav-search input:focus {
-            box-shadow: 0 4px 12px var(--search-shadow);
-            border-color: #e0224d;
+            transition: border-color 0.3s ease; /* Smooth border transition on focus */
         }
 
-        /* Toggle Switch */
+        /* Focus state for input fields */
+        .login-form input[type="text"]:focus,
+        .login-form input[type="password"]:focus {
+            border-color: var(--accent); /* Highlight border on focus */
+            outline: none; /* Remove default outline */
+        }
+
+        /* Button styling */
+        .login-form button {
+            width: 100%; /* Full width button */
+            padding: 12px 20px;
+            background-color: var(--button-bg);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease; /* Smooth hover and click effects */
+        }
+
+        /* Button hover state */
+        .login-form button:hover {
+            background-color: var(--button-hover-bg);
+            transform: translateY(-2px); /* Slight lift effect */
+        }
+        /* Button active (click) state */
+        .login-form button:active {
+            transform: translateY(0); /* Reset position on click */
+        }
+
+        /* Toggle Switch for dark/light mode */
         .toggle-switch {
-            position: relative;
-            width: 55px; /* Slightly wider switch */
-            height: 28px; /* Slightly taller switch */
-            flex-shrink: 0;
+            position: absolute; /* Position relative to the viewport */
+            top: 20px;
+            right: 20px;
+            width: 55px;
+            height: 28px;
         }
         .toggle-switch input {
-            opacity: 0;
+            opacity: 0; /* Hide default checkbox */
             width: 0;
             height: 0;
         }
@@ -141,674 +141,183 @@
             cursor: pointer;
             top: 0; left: 0; right: 0; bottom: 0;
             background-color: #ccc;
-            border-radius: 34px;
+            border-radius: 34px; /* Pill shape */
             transition: 0.4s;
         }
         .slider:before {
             position: absolute;
             content: "";
-            height: 22px; /* Slightly larger circle */
-            width: 22px; /* Slightly larger circle */
+            height: 22px;
+            width: 22px;
             left: 3px;
             bottom: 3px;
             background-color: white;
-            border-radius: 50%;
+            border-radius: 50%; /* Circle shape */
             transition: 0.4s;
         }
         input:checked + .slider {
-            background-color: var(--accent);
+            background-color: var(--accent); /* Accent color when checked */
         }
         input:checked + .slider:before {
-            transform: translateX(27px); /* Adjusted translation for wider switch */
+            transform: translateX(27px); /* Move circle to the right */
         }
 
-        /* Page Title */
-        h1 {
-            font-size: 2.6em; /* Slightly reduced font size for better balance */
-            margin-bottom: 40px;
-            font-weight: 700;
-            color: var(--dark);
-            letter-spacing: 1.5px;
-            user-select: none;
-            text-align: center;
-            line-height: 1.2; /* Improved line height */
-            padding: 0 10px; /* Added horizontal padding */
-        }
-
-        /* Sections */
-        section {
-            width: 100%;
-            max-width: 1200px;
-            margin-bottom: 60px;
-            padding: 0 10px; /* Added horizontal padding to sections */
-            display: none;
-        }
-        section.active {
-            display: block;
-        }
-        section h2 {
-            font-size: 2em;
-            margin-bottom: 24px;
-            color: var(--accent);
-            border-bottom: 3px solid var(--accent);
-            padding-bottom: 8px;
-            font-weight: 600;
-        }
-
-        /* Video grid */
-        .video-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* More flexible grid */
-            gap: 30px; /* Increased gap */
-        }
-        /* Responsive grid adjustments (kept for specific breakpoints if needed, but auto-fit is better) */
-        @media (min-width: 600px) {
-            .video-list {
-                gap: 28px;
-            }
-        }
-        @media (min-width: 900px) {
-            .video-list {
-                gap: 32px;
-            }
-        }
-        @media (min-width: 1200px) {
-            .video-list {
-                gap: 35px;
-            }
-        }
-
-        /* Video cards */
-        .video-wrapper {
-            background-color: var(--card-bg);
-            border-radius: 16px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
-            overflow: hidden;
-            transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            flex-direction: column;
-            border: 1px solid var(--border-color); /* Added subtle border */
-        }
-        .video-wrapper:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
-        }
-        iframe {
-            width: 100%;
-            aspect-ratio: 16 / 9;
-            border: none;
-            display: block;
-            border-radius: 16px 16px 0 0;
-            background: black;
-        }
-        .video-link {
-            text-align: center;
-            padding: 15px 10px; /* Increased padding */
-            font-weight: 600;
-            font-size: 1rem; /* Slightly larger font size */
-            color: var(--accent);
-            text-decoration: none;
-            border-bottom: 1px solid var(--border-color); /* Used variable border color */
-            transition: color 0.3s ease;
-            user-select: text;
-        }
-        .video-link:hover {
-            color: #e0224d;
-        }
-
-        /* Notes container */
-        .notes-container {
-            padding: 15px 20px 20px; /* Adjusted padding */
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        .notes-title {
-            font-weight: 600;
-            margin-bottom: 12px; /* Increased margin */
-            color: var(--dark);
-            font-size: 1rem;
-        }
-        .note-list {
-            list-style: none;
-            padding-left: 0;
-            margin: 0;
-            flex-grow: 1;
-            overflow-y: auto;
-        }
-        .note-list li {
-            margin-bottom: 10px; /* Increased margin */
-        }
-        .note-list a {
-            color: var(--accent);
-            text-decoration: none;
-            font-size: 0.95rem; /* Slightly larger font size */
-            transition: color 0.3s ease;
-        }
-        .note-list a:hover {
-            color: #e0224d;
-            text-decoration: underline;
-        }
-
-        /* Footer */
-        .footer {
-            margin-top: auto;
-            font-size: 0.9em;
-            color: var(--dark);
-            text-align: center;
-            padding: 20px 0 10px;
-            user-select: none;
-            width: 100%;
-        }
-
-        /* Completed section */
-        .completed-section {
-            max-width: 1200px;
-            width: 100%;
-            margin-bottom: 60px;
-            background-color: var(--card-bg);
-            border-radius: 16px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
-            padding: 28px 35px; /* Increased padding */
-            user-select: none;
-            border: 1px solid var(--border-color); /* Added subtle border */
-        }
-        .completed-section h2 {
-            color: var(--accent);
-            margin-bottom: 28px; /* Increased margin */
-            font-weight: 600;
-            font-size: 2.2em; /* Slightly larger heading */
-        }
-        .progress-bar-container {
-            background-color: #eee;
-            border-radius: 12px;
-            overflow: hidden;
-            height: 20px; /* Slightly taller progress bar */
-            margin: 15px 0 28px; /* Adjusted margin */
-        }
-        [data-theme="dark"] .progress-bar-container {
-            background-color: #333;
-        }
-        .progress-bar {
-            height: 100%;
-            background-color: var(--accent);
-            width: 0;
-            transition: width 0.6s ease;
-        }
-        .course-progress {
-            font-weight: 600;
-            margin-bottom: 12px; /* Increased margin */
-            color: var(--dark);
-            font-size: 1.05rem; /* Slightly larger font size */
-        }
-
-        /* Media queries for responsive navbar */
-        @media (max-width: 768px) {
-            nav {
-                flex-direction: column;
-                align-items: center;
-                padding: 15px;
-            }
-            .nav-search {
-                order: 3;
-                width: 100%;
-                margin: 15px 0 10px; /* Adjusted margin */
-            }
-            .nav-links {
-                order: 2;
-                margin: 10px 0;
-                width: 100%;
-                justify-content: space-around;
-                gap: 15px; /* Adjusted gap for smaller screens */
-            }
-            .nav-title {
-                order: 1;
-                margin-bottom: 10px;
-            }
-            .toggle-switch {
-                order: 4;
-                margin-top: 10px;
-            }
-        }
-
-        /* Further adjustments for very small screens */
+        /* Responsive adjustments for smaller screens */
         @media (max-width: 480px) {
             body {
-                padding: 0 15px 30px;
+                padding: 15px; /* Reduce overall padding */
             }
-            nav {
-                padding: 10px 15px;
-                gap: 10px;
+            .login-container {
+                padding: 30px 20px; /* Adjust container padding */
             }
-            .nav-title {
-                font-size: 1.5rem;
+            .login-container h2 {
+                font-size: 2em; /* Smaller heading */
             }
-            .nav-links {
-                gap: 10px;
-                font-size: 0.95rem;
+            .login-form input {
+                padding: 10px 12px; /* Smaller input padding */
+                font-size: 1em; /* Smaller input font size */
             }
-            .nav-search input {
-                padding: 8px 15px;
-                font-size: 0.95rem;
+            .login-form button {
+                padding: 10px 15px; /* Smaller button padding */
+                font-size: 1em; /* Smaller button font size */
             }
-            h1 {
-                font-size: 2em;
-                margin-bottom: 30px;
-            }
-            section h2 {
-                font-size: 1.8em;
-                margin-bottom: 20px;
-            }
-            .video-list {
-                gap: 20px;
-            }
-            .video-link {
-                font-size: 0.9rem;
-            }
-            .notes-title {
-                font-size: 0.9rem;
-            }
-            .note-list a {
-                font-size: 0.85rem;
-            }
-            .completed-section {
-                padding: 20px 25px;
-            }
-            .completed-section h2 {
-                font-size: 1.8em;
-            }
-            .course-progress {
-                font-size: 0.95rem;
+            .toggle-switch {
+                top: 15px;
+                right: 15px;
             }
         }
 
-        /* New style for centering the welcome paragraph */
-        .home-description {
-            margin: 0 auto 20px auto; /* Centers the block and adds bottom margin */
+        /* Message Box Styling */
+        .message-box {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 1000;
             text-align: center;
             font-size: 1.2em;
-            max-width: 800px;
-            line-height: 1.6;
+            border: 1px solid var(--border-color);
+            max-width: 90%; /* Responsive width */
+        }
+
+        .message-box button {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 1em; /* Ensure button text scales */
         }
     </style>
 </head>
 <body>
+    <label class="toggle-switch" title="Toggle dark mode">
+        <input type="checkbox" id="modeToggle" aria-label="Toggle dark mode" />
+        <span class="slider"></span>
+    </label>
 
-    <nav>
-        <a href="#home" class="nav-title">BHAICHARA ON TOP</a>
-        <div class="nav-links">
-            <a href="#pslp">PSLP</a>
-            <a href="#cns">CNS</a>
-            <a href="#dbms">DBMS</a>
-            <a href="#java">JAVA</a>
-            <a href="#toc">TOC</a>
-        </div>
-        <div class="nav-search">
-            <input type="search" id="searchInput" placeholder="Search videos by name..." aria-label="Search videos by name" />
-        </div>
-        <label class="toggle-switch" title="Toggle dark mode">
-            <input type="checkbox" id="modeToggle" aria-label="Toggle dark mode" />
-            <span class="slider"></span>
-        </label>
-    </nav>
+    <div class="login-container">
+        <h2>Welcome Back!</h2>
+        <form id="loginForm" class="login-form">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required autocomplete="username">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required autocomplete="current-password">
+            <button type="submit">Login</button>
+        </form>
+    </div>
 
-    <h1 id="pageTitle"></h1>
+    <script>
+        /**
+         * Initializes the theme (dark/light mode) based on localStorage or system preference.
+         */
+        function initTheme() {
+            const toggle = document.getElementById("modeToggle");
+            const savedTheme = localStorage.getItem("theme");
 
-    <section id="homeSection" class="active" aria-label="Welcome section">
-        <p class="home-description">
-            Welcome to BrightPath, your one-stop solution for comprehensive course materials. Use the navigation bar above to explore different subjects, track your progress, and access valuable resources.
-        </p>
-        <div class="completed-section" aria-label="Completed videos and progress">
-            <h2>Course Completion Summary</h2>
-            <div id="completionStats"></div>
-        </div>
-    </section>
-
-    <section id="pslpSection">
-        <h2>PSLP</h2>
-        <div class="video-list" id="pslpList"></div>
-    </section>
-
-    <section id="cnsSection">
-        <h2>CNS</h2>
-        <div class="video-list" id="cnsList"></div>
-    </section>
-
-    <section id="dbmsSection">
-        <h2>DBMS</h2>
-        <div class="video-list" id="dbmsList"></div>
-    </section>
-
-    <section id="javaSection">
-        <h2>JAVA</h2>
-        <div class="video-list" id="javaList"></div>
-    </section>
-
-    <section id="tocSection">
-        <h2>TOC</h2>
-        <div class="video-list" id="tocList"></div>
-    </section>
-
-    <div class="footer">© 2025 BhaiChara Pvt Ltd. All rights reserved.</div>
-
-<script>
-    // Data for videos, each has a `completed` boolean property to track completion.
-    // The `videoUrl` now directly contains the YouTube embed URL.
-    // IMPORTANT: Replace these placeholder URLs with your actual YouTube video embed URLs.
-   const sectionsData = {
-    pslp: [
-        { title: "PSLP UNIT - 1", videoUrl: "https://www.youtube.com/embed/aRvyN1omlhc", completed: false,
-          notes: [{ name: "PSLP UNIT NOTES - 1", url: "https://docs.google.com/document/d/your-doc-id-1" }] },
-        { title: "PSLP UNIT - 2", videoUrl: "https://www.youtube.com/embed/olDzHZaKYDo", completed: false,
-          notes: [{ name: "PSLP UNIT NOTES - 2", url: "https://docs.google.com/document/d/your-doc-id-1" }] },
-        { title: "PSLP UNIT - 3", videoUrl: "https://www.youtube.com/embed/niDbghcNdS8", completed: false,
-          notes: [{ name: "PSLP UNIT NOTES - 3", url: "https://docs.google.com/document/d/your-doc-id-1" }] },
-        { title: "PSLP UNIT - 3", videoUrl: "https://www.youtube.com/embed/pwlnzSS2ILI", completed: false,
-          notes: [{ name: "PSLP UNIT NOTES - 3", url: "https://docs.google.com/document/d/your-doc-id-1" }] },
-        { title: "PSLP UNIT - 4", videoUrl: "https://www.youtube.com/embed/UmPmTv2YQB8", completed: false,
-          notes: [{ name: "PSLP UNIT NOTES - 4", url: "https://docs.google.com/document/d/your-doc-id-1" }] }
-    ],
-
-    cns: [
-        { title: "CNS UNIT - 1", videoUrl: "https://www.youtube.com/embed/DQhxgvR--xI", completed: false,
-          notes: [{ name: "CNS UNIT NOTES - 1", url: "https://drive.google.com/file/d/1B3TyqEUOVXOQL4L4DWI_u5YjWR-F3sqN/view?usp=drivesdk" }] },
-        { title: "CNS UNIT - 2", videoUrl: "https://www.youtube.com/embed/Vtr4bHFXu40", completed: false,
-          notes: [{ name: "CNS UNIT NOTES - 2", url: "https://docs.google.com/document/d/your-doc-id-2" }] },
-        { title: "CNS UNIT - 3", videoUrl: "https://www.youtube.com/embed/yxWOPbWu1EI", completed: false,
-          notes: [{ name: "CNS UNIT NOTES - 3", url: "https://docs.google.com/document/d/your-doc-id-2" }] },
-        { title: "CNS UNIT - 4", videoUrl: "https://www.youtube.com/embed/Ht1AhZj_lkw", completed: false,
-          notes: [{ name: "CNS UNIT NOTES - 4", url: "https://docs.google.com/document/d/your-doc-id-2" }] }
-    ],
-
-    dbms: [
-        { title: "DBMS UNIT - 1", videoUrl: "https://www.youtube.com/embed/ScWOVJAMMe8", completed: false,
-          notes: [{ name: "DBMS UNIT NOTES - 1", url: "https://docs.google.com/document/d/your-doc-id-3" }] },
-        { title: "DBMS UNIT - 2", videoUrl: "https://www.youtube.com/embed/mk9F0N6DnDk", completed: false,
-          notes: [{ name: "DBMS UNIT NOTES - 2", url: "https://docs.google.com/document/d/your-doc-id-3" }] },
-        { title: "DBMS UNIT - 3", videoUrl: "https://www.youtube.com/embed/FO1xi9fkSD8", completed: false,
-          notes: [{ name: "DBMS UNIT NOTES - 3", url: "https://docs.google.com/document/d/your-doc-id-3" }] },
-        { title: "DBMS UNIT - 4", videoUrl: "https://www.youtube.com/embed/FO1xi9fkSD8", completed: false,
-          notes: [{ name: "DBMS UNIT NOTES - 4", url: "https://docs.google.com/document/d/your-doc-id-3" }] }
-    ],
-
-    java: [
-        { title: "JAVA UNIT - 1", videoUrl: "https://www.youtube.com/embed/4RJT4v0SRDU", completed: false,
-          notes: [{ name: "JAVA UNIT NOTES - 1", url: "https://docs.google.com/document/d/your-doc-id-4" }] },
-        { title: "JAVA UNIT - 2", videoUrl: "https://www.youtube.com/embed/vEv_uYr5Yqk", completed: false,
-          notes: [{ name: "JAVA UNIT NOTES - 2", url: "https://docs.google.com/document/d/your-doc-id-4" }] },
-        { title: "JAVA UNIT - 3", videoUrl: "https://www.youtube.com/embed/vOTpZp7-_hM", completed: false,
-          notes: [{ name: "JAVA UNIT NOTES - 3", url: "https://docs.google.com/document/d/your-doc-id-4" }] },
-        { title: "JAVA UNIT - 4", videoUrl: "https://www.youtube.com/embed/3XlTekglPek", completed: false,
-          notes: [{ name: "JAVA UNIT NOTES - 4", url: "https://docs.google.com/document/d/your-doc-id-4" }] }
-    ],
-    
-    toc: [
-        { title: "TOC UNIT - 1", videoUrl: "https://www.youtube.com/embed/JqkE7iFDsUs", completed: false,
-          notes: [{ name: "TOC UNIT NOTES - 1", url: "https://docs.google.com/document/d/your-doc-id-5" }] },
-        { title: "TOC UNIT - 2", videoUrl: "https://www.youtube.com/embed/yidPH5-4E7I", completed: false,
-          notes: [{ name: "TOC UNIT NOTES - 2", url: "https://docs.google.com/document/d/your-doc-id-5" }] },
-        { title: "TOC UNIT - 3", videoUrl: "https://www.youtube.com/embed/e5Ru5PTtKy4", completed: false,
-          notes: [{ name: "TOC UNIT NOTES - 3", url: "https://docs.google.com/document/d/your-doc-id-5" }] },
-        { title: "TOC UNIT - 4", videoUrl: "https://www.youtube.com/embed/iUktE-wKrjY", completed: false,
-          notes: [{ name: "TOC UNIT NOTES - 4", url: "https://docs.google.com/document/d/your-doc-id-5" }] }
-    ]
-};
-
-
-    // Map of route names (from URL hash) to their section IDs and display titles.
-    // dataKey refers to the key in the sectionsData object for video content.
-    const routeMap = {
-        'home': { id: 'homeSection', title: 'Welcome to BrightPath!' },
-        'pslp': { id: 'pslpSection', dataKey: 'pslp', title: 'PSLP Videos' },
-        'cns': { id: 'cnsSection', dataKey: 'cns', title: 'CNS Videos' },
-        'dbms': { id: 'dbmsSection', dataKey: 'dbms', title: 'DBMS Videos' },
-        'java': { id: 'javaSection', dataKey: 'java', title: 'JAVA Videos' },
-        'toc': { id: 'tocSection', dataKey: 'toc', title: 'TOC Videos' }
-    };
-
-    /**
-     * Renders videos for a specific section into its corresponding container.
-     * @param {string} sectionKey - The key from `sectionsData` (e.g., 'pslp', 'cns').
-     */
-    function renderVideos(sectionKey) {
-        // Do not render videos for the 'home' section as it's a summary page.
-        if (!sectionKey || sectionKey === 'home') return;
-
-        const videos = sectionsData[sectionKey];
-        const container = document.getElementById(sectionKey + "List");
-
-        // Ensure container and video data exist before proceeding.
-        if (!container || !videos) {
-            console.error(`Container or video data not found for section: ${sectionKey}`);
-            return;
+            if (savedTheme) {
+                document.documentElement.setAttribute("data-theme", savedTheme);
+                toggle.checked = savedTheme === "dark";
+            } else {
+                // Default to system preference if no theme is saved.
+                const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+                document.documentElement.setAttribute("data-theme", prefersDark ? "dark" : "light");
+                toggle.checked = prefersDark;
+            }
         }
 
-        // Clear existing videos to prevent duplicates on re-render.
-        container.innerHTML = "";
+        /**
+         * Displays a custom message box instead of alert().
+         * @param {string} message - The message to display.
+         * @param {function} [callback] - Optional callback function to execute after message is dismissed.
+         */
+        function showMessageBox(message, callback) {
+            const messageBox = document.createElement('div');
+            messageBox.className = 'message-box'; // Apply CSS class for styling
 
-        // Iterate over videos and create HTML elements for each.
-        videos.forEach((video, i) => {
-            const videoEl = document.createElement("div");
-            videoEl.className = "video-wrapper";
-            videoEl.dataset.title = video.title.toLowerCase(); // Store title for search filtering
-
-            videoEl.innerHTML = `
-                <iframe
-                    src="${video.videoUrl}"
-                    allowfullscreen
-                    loading="lazy"
-                    title="${video.title}"
-                ></iframe>
-                <a href="${video.videoUrl}" target="_blank" rel="noopener" class="video-link">${video.title}</a>
-                <div class="notes-container">
-                    <div class="notes-title">Notes:</div>
-                    <ul class="note-list">
-                        ${video.notes.map(note => `<li><a href="${note.url}" target="_blank" rel="noopener">${note.name}</a></li>`).join('')}
-                    </ul>
-                </div>
-                <label style="padding:10px 16px; font-weight:600; cursor:pointer; color: var(--accent); user-select:none;">
-                    <input type="checkbox" data-section="${sectionKey}" data-index="${i}" ${video.completed ? "checked" : ""} /> Mark as completed
-                </label>
+            messageBox.innerHTML = `
+                <p>${message}</p>
+                <button id="messageBoxOk">OK</button>
             `;
-            container.appendChild(videoEl);
-        });
-    }
+            document.body.appendChild(messageBox);
 
-    /**
-     * Filters videos in the currently active section based on a search term.
-     * @param {string} searchTerm - The text to search for in video titles.
-     */
-    function filterVideos(searchTerm) {
-        const term = searchTerm.toLowerCase();
-        const currentHash = window.location.hash.substring(1) || 'home';
-        const currentRoute = routeMap[currentHash];
+            document.getElementById('messageBoxOk').addEventListener('click', () => {
+                messageBox.remove();
+                if (callback) {
+                    callback();
+                }
+            });
+        }
 
-        // Only filter if we are on a section that displays videos.
-        if (currentRoute && currentRoute.dataKey) {
-            const container = document.getElementById(currentRoute.dataKey + "List");
-            if (container) {
-                Array.from(container.children).forEach(videoEl => {
-                    const title = videoEl.dataset.title || "";
-                    // Show/hide video element based on search term inclusion.
-                    videoEl.style.display = title.includes(term) ? "block" : "none";
+        document.addEventListener("DOMContentLoaded", () => {
+            initTheme(); // Set initial dark/light mode.
+
+            // Event listener for the dark mode toggle switch.
+            const modeToggle = document.getElementById("modeToggle");
+            if (modeToggle) {
+                modeToggle.addEventListener("change", () => {
+                    if (modeToggle.checked) {
+                        document.documentElement.setAttribute("data-theme", "dark");
+                        localStorage.setItem("theme", "dark"); // Save theme preference.
+                    } else {
+                        document.documentElement.setAttribute("data-theme", "light");
+                        localStorage.setItem("theme", "light"); // Save theme preference.
+                    }
                 });
             }
-        }
-    }
 
-    /**
-     * Calculates and updates the completion statistics and progress bars for all courses.
-     */
-    function updateCompletionStats() {
-        const completionContainer = document.getElementById("completionStats");
-        if (!completionContainer) return; // Exit if container not found
-        completionContainer.innerHTML = ""; // Clear previous stats
+            const loginForm = document.getElementById('loginForm');
+            if (loginForm) {
+                loginForm.addEventListener('submit', (e) => {
+                    e.preventDefault(); // Prevent default form submission
 
-        for (const [key, videos] of Object.entries(sectionsData)) {
-            const completedCount = videos.filter(v => v.completed).length;
-            const total = videos.length;
-            const percentage = total === 0 ? 0 : Math.round((completedCount / total) * 100);
+                    const usernameInput = document.getElementById('username');
+                    const passwordInput = document.getElementById('password');
 
-            const sectionTitle = key.toUpperCase();
+                    const username = usernameInput.value;
+                    const password = passwordInput.value;
 
-            const sectionDiv = document.createElement("div");
-            sectionDiv.className = "course-progress";
-
-            sectionDiv.innerHTML = `
-                <div>${sectionTitle}: ${completedCount} / ${total} videos completed (${percentage}%)</div>
-                <div class="progress-bar-container" aria-label="${sectionTitle} progress bar">
-                    <div class="progress-bar" style="width:${percentage}%;"></div>
-                </div>
-            `;
-            completionContainer.appendChild(sectionDiv);
-        }
-    }
-
-    /**
-     * Saves the current completion state of all videos to localStorage.
-     */
-    function saveCompleted() {
-        localStorage.setItem("videoCompletion", JSON.stringify(sectionsData));
-    }
-
-    /**
-     * Loads the completion state from localStorage and updates `sectionsData`.
-     */
-    function loadCompleted() {
-        const saved = localStorage.getItem("videoCompletion");
-        if (saved) {
-            const savedData = JSON.parse(saved);
-            // Iterate through saved data and apply it to the `sectionsData`.
-            for (const [key, videos] of Object.entries(savedData)) {
-                if (sectionsData[key]) { // Check if the section key exists in our data
-                    sectionsData[key].forEach((video, i) => {
-                        // Ensure the saved data has a boolean 'completed' property for the video at this index.
-                        if (typeof videos[i]?.completed === "boolean") {
-                            video.completed = videos[i].completed;
-                        }
-                    });
-                }
-            }
-        }
-    }
-
-    /**
-     * Initializes the theme (dark/light mode) based on localStorage or system preference.
-     */
-    function initTheme() {
-        const toggle = document.getElementById("modeToggle");
-        const savedTheme = localStorage.getItem("theme");
-
-        if (savedTheme) {
-            document.documentElement.setAttribute("data-theme", savedTheme);
-            toggle.checked = savedTheme === "dark";
-        } else {
-            // Default to system preference if no theme is saved.
-            const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-            document.documentElement.setAttribute("data-theme", prefersDark ? "dark" : "light");
-            toggle.checked = prefersDark;
-        }
-    }
-
-    /**
-     * Handles client-side routing based on the URL hash.
-     * Shows the relevant section and updates the page title.
-     */
-    function handleRouting() {
-        const hash = window.location.hash.substring(1); // Get hash without '#'
-        const routeName = hash || 'home'; // Default to 'home' if no hash is present
-
-        // Hide all sections first.
-        document.querySelectorAll('section').forEach(section => {
-            section.classList.remove('active');
-        });
-
-        // Find the target route in our map.
-        const targetRoute = routeMap[routeName];
-        const pageTitleElement = document.getElementById('pageTitle');
-
-        if (targetRoute) {
-            // Show the active section.
-            document.getElementById(targetRoute.id).classList.add('active');
-            // Update the main page title.
-            if (pageTitleElement) {
-                pageTitleElement.textContent = targetRoute.title;
-            }
-
-            // If the route corresponds to a video section, render its videos.
-            if (targetRoute.dataKey) {
-                renderVideos(targetRoute.dataKey);
-                // Clear search input and re-filter for the newly active section.
-                const searchInput = document.getElementById("searchInput");
-                if (searchInput) searchInput.value = '';
-                filterVideos('');
-            } else {
-                // If on the home page, clear search input as there are no videos to filter directly.
-                const searchInput = document.getElementById("searchInput");
-                if (searchInput) searchInput.value = '';
-                // Ensure no videos are displayed if the search input was previously active on a video page.
-                // This is handled by `section.style.display = 'none'` in filterVideos if dataKey is null.
-            }
-        } else {
-            // If an invalid hash, redirect to home page.
-            window.location.hash = '#home';
-            if (pageTitleElement) {
-                pageTitleElement.textContent = routeMap['home'].title;
-            }
-        }
-    }
-
-    // Event Listeners Setup - executed once the DOM is fully loaded.
-    document.addEventListener("DOMContentLoaded", () => {
-        loadCompleted(); // Load completion data from localStorage.
-        updateCompletionStats(); // Update progress bars and stats.
-        initTheme(); // Set initial dark/light mode.
-
-        // Handle initial routing when the page loads (e.g., if a user loads with #pslp).
-        handleRouting();
-
-        // Listen for hash changes in the URL (e.g., when navigation links are clicked).
-        window.addEventListener('hashchange', handleRouting);
-
-        // Event listener for the search input.
-        const searchInput = document.getElementById("searchInput");
-        if (searchInput) {
-            searchInput.addEventListener("input", (e) => {
-                filterVideos(e.target.value);
-            });
-        }
-
-        // Event delegation for handling video completion checkboxes.
-        document.body.addEventListener("change", (e) => {
-            // Check if the changed element is a completion checkbox.
-            if (e.target.matches('input[type="checkbox"][data-section][data-index]')) {
-                const section = e.target.dataset.section;
-                const index = parseInt(e.target.dataset.index);
-
-                // Update the completion status in our data model.
-                if (sectionsData[section] && sectionsData[section][index]) {
-                    sectionsData[section][index].completed = e.target.checked;
-                    saveCompleted(); // Save updated state to localStorage.
-                    updateCompletionStats(); // Re-calculate and display progress.
-                }
+                    // Simple hardcoded authentication for demonstration
+                    // In a real application, this would involve server-side authentication
+                    if (username === 'kush' && password === 'goyal') {
+                        localStorage.setItem('isAuthenticated', 'true'); // Set authentication flag
+                        showMessageBox('Login successful!', () => {
+                            window.location.href = 'home.html#home'; // Redirect to home page of main app
+                        });
+                    } else {
+                        localStorage.setItem('isAuthenticated', 'false'); // Ensure flag is false
+                        showMessageBox('Invalid username or password.');
+                    }
+                });
             }
         });
-
-        // Event listener for the dark mode toggle switch.
-        const modeToggle = document.getElementById("modeToggle");
-        if (modeToggle) {
-            modeToggle.addEventListener("change", () => {
-                if (modeToggle.checked) {
-                    document.documentElement.setAttribute("data-theme", "dark");
-                    localStorage.setItem("theme", "dark"); // Save theme preference.
-                } else {
-                    document.documentElement.setAttribute("data-theme", "light");
-                    localStorage.setItem("theme", "light"); // Save theme preference.
-                }
-            });
-        }
-    });
-</script>
-
+    </script>
 </body>
 </html>
