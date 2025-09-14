@@ -5,14 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>DSA - BhaiChara</title>
     <style>
-        /* Include your existing CSS or specific styles for the DSA page */
+        /* Define CSS variables for theme colors */
         :root {
             --primary: #2c3e50;
             --accent: #ff385c;
             --light: #f7f7f7;
             --dark: #484848;
             --card-bg: #fff;
-            --border-color: #eee;
+            --border-color: #eee; /* Added for subtle borders */
+
             --bg-color: var(--light);
             --text-color: var(--primary);
             --nav-bg: #fff;
@@ -20,13 +21,40 @@
             --search-border: var(--accent);
             --search-shadow: rgba(255, 56, 92, 0.3);
         }
+        /* Dark theme variables */
+        [data-theme="dark"] {
+            --bg-color: #121212;
+            --text-color: #eee;
+            --nav-bg: #1f1f1f;
+            --nav-text: #ff385c;
+            --search-border: #ff385c;
+            --search-shadow: rgba(255, 56, 92, 0.6);
+            --card-bg: #1f1f1f;
+            --accent: #ff385c;
+            --dark: #ddd;
+            --border-color: #333; /* Dark theme border color */
+        }
+
+        /* Universal box-sizing */
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Body styling */
         body {
+            margin: 0;
+            padding: 0 20px 40px;
             font-family: 'Helvetica Neue', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
-            margin: 0;
-            padding: 0 20px 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
+
+        /* NAVBAR */
         nav {
             width: 100%;
             max-width: 1200px;
@@ -38,59 +66,224 @@
             margin-bottom: 40px;
             border-radius: 12px;
             box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            flex-wrap: wrap;
+            gap: 15px;
         }
+
+        .nav-title {
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--nav-text);
+            letter-spacing: 1.5px;
+            user-select: none;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            margin: 0 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            flex-grow: 1;
+        }
+
         .nav-links a {
             color: var(--nav-text);
             text-decoration: none;
             font-weight: 600;
             font-size: 1.05rem;
+            transition: color 0.3s ease;
+            white-space: nowrap;
             padding: 5px 0;
         }
+
         .nav-links a:hover {
             color: var(--accent);
         }
+
+        .nav-search {
+            flex-grow: 1;
+            margin: 0 24px;
+            min-width: 180px;
+            max-width: 500px;
+        }
+
+        .nav-search input {
+            width: 100%;
+            padding: 10px 18px;
+            font-size: 1.05rem;
+            border-radius: 9999px;
+            border: 2px solid var(--search-border);
+            box-shadow: 0 2px 8px var(--search-shadow);
+            outline-offset: 2px;
+            transition: box-shadow 0.3s ease, border-color 0.3s ease;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        .nav-search input::placeholder {
+            color: var(--text-color);
+            opacity: 0.7;
+        }
+
+        .nav-search input:focus {
+            box-shadow: 0 4px 12px var(--search-shadow);
+            border-color: #e0224d;
+        }
+
+        /* Toggle Switch */
+        .toggle-switch {
+            position: relative;
+            width: 55px;
+            height: 28px;
+            flex-shrink: 0;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #ccc;
+            border-radius: 34px;
+            transition: 0.4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            border-radius: 50%;
+            transition: 0.4s;
+        }
+
+        input:checked + .slider {
+            background-color: var(--accent);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(27px);
+        }
+
+        /* Logout button */
+        #logoutButton {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            white-space: nowrap;
+        }
+
+        #logoutButton:hover {
+            background-color: #e0224d;
+            transform: translateY(-2px);
+        }
+
+        #logoutButton:active {
+            transform: translateY(0);
+        }
+
+        /* Page Title */
         h1 {
             font-size: 2.6em;
             margin-bottom: 40px;
+            font-weight: 700;
             text-align: center;
         }
+
+        /* Sections */
         section {
             width: 100%;
             max-width: 1200px;
             margin-bottom: 60px;
+            padding: 0 10px;
+            display: none;
         }
+
+        section.active {
+            display: block;
+        }
+
+        section h2 {
+            font-size: 2em;
+            margin-bottom: 24px;
+            color: var(--accent);
+            border-bottom: 3px solid var(--accent);
+            padding-bottom: 8px;
+            font-weight: 600;
+        }
+
         .video-list {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 30px;
         }
+
         .video-wrapper {
             background-color: var(--card-bg);
             border-radius: 16px;
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
             overflow: hidden;
+            transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--border-color);
         }
+
+        .video-wrapper:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+        }
+
         iframe {
             width: 100%;
             aspect-ratio: 16 / 9;
             border: none;
+            display: block;
+            border-radius: 16px 16px 0 0;
+            background: black;
         }
-        .job-form {
-            margin-bottom: 20px;
+
+        .video-link {
+            text-align: center;
+            padding: 15px 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px solid var(--border-color);
+            transition: color 0.3s ease;
         }
-        .job-opening {
-            background-color: var(--card-bg);
-            padding: 10px;
-            border-radius: 10px;
-            border: 1px solid var(--border-color);
-            margin-bottom: 10px;
+
+        .video-link:hover {
+            color: #e0224d;
         }
-        .applyBtn {
-            background-color: var(--accent);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 8px;
-            cursor: pointer;
+
+        /* Footer */
+        .footer {
+            margin-top: auto;
+            font-size: 0.9em;
+            color: var(--dark);
+            text-align: center;
+            padding: 20px 0 10px;
+            width: 100%;
         }
     </style>
 </head>
@@ -105,8 +298,16 @@
             <a href="index.html#ee">EE</a>
             <a href="index.html#os">OS</a>
             <a href="index.html#se">SE</a>
-            <a href="dsa.html">DSA</a>
+            <a href="dsa.html">DSA</a> <!-- Link to DSA page -->
         </div>
+        <div class="nav-search">
+            <input type="search" id="searchInput" placeholder="Search DSA problems..." aria-label="Search DSA problems" />
+        </div>
+        <label class="toggle-switch" title="Toggle dark mode">
+            <input type="checkbox" id="modeToggle" aria-label="Toggle dark mode" />
+            <span class="slider"></span>
+        </label>
+        <button id="logoutButton">Logout</button> 
     </nav>
 
     <h1>DSA - Data Structures & Algorithms</h1>
@@ -114,68 +315,13 @@
     <section id="dsaSection">
         <h2>DSA Problems</h2>
         <div class="video-list" id="dsaList"></div>
-
-        <h2>Job Openings</h2>
-        <div class="job-form">
-            <form id="jobForm">
-                <label for="jobTitle">Job Title:</label>
-                <input type="text" id="jobTitle" placeholder="Enter job title" required />
-                
-                <label for="jobDescription">Job Description:</label>
-                <textarea id="jobDescription" placeholder="Enter job description" required></textarea>
-
-                <label for="company">Company:</label>
-                <input type="text" id="company" placeholder="Enter company name" required />
-
-                <button type="submit">Add Job Opening</button>
-            </form>
-        </div>
-        <div id="jobList"></div>
     </section>
 
+    <!-- Footer -->
+    <div class="footer">© 2025 BhaiChara Pvt Ltd. All rights reserved.</div>
+
     <script>
-        let jobOpenings = [];
-
-        // Display Job Openings
-        function displayJobOpenings() {
-            const jobListContainer = document.getElementById('jobList');
-            jobListContainer.innerHTML = ''; // Clear previous jobs
-
-            jobOpenings.forEach((job, index) => {
-                const jobEl = document.createElement('div');
-                jobEl.className = 'job-opening';
-                jobEl.innerHTML = `
-                    <h3>${job.title}</h3>
-                    <p><strong>Company:</strong> ${job.company}</p>
-                    <p>${job.description}</p>
-                    <button class="applyBtn" data-index="${index}">Apply</button>
-                `;
-                jobListContainer.appendChild(jobEl);
-            });
-        }
-
-        // Add job opening
-        document.getElementById('jobForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            const title = document.getElementById('jobTitle').value;
-            const description = document.getElementById('jobDescription').value;
-            const company = document.getElementById('company').value;
-
-            jobOpenings.push({ title, description, company });
-            displayJobOpenings();
-            e.target.reset();
-        });
-
-        // Apply for job (you can add more advanced logic here)
-        document.getElementById('jobList').addEventListener('click', function (e) {
-            if (e.target && e.target.classList.contains('applyBtn')) {
-                const index = e.target.dataset.index;
-                alert(`Applied for job: ${jobOpenings[index].title}`);
-            }
-        });
-
-        // Example of how to render DSA videos (add actual DSA topics and videos)
+        // Example of how to render DSA problems (add actual DSA topics and videos)
         function renderDSAVideos() {
             const dsaListContainer = document.getElementById('dsaList');
             const dsaTopics = [
@@ -196,8 +342,7 @@
             });
         }
 
-        // Call function to render videos
-        renderDSAVideos();
+        renderDSAVideos(); // Call function to render DSA videos
     </script>
 </body>
 </html>
