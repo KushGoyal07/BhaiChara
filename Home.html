@@ -1,1 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BhaiChara</title>
+    <style>
+        /* Define CSS variables for theme colors */
+        :root {
+            --primary: #2c3e50;
+            --accent: #ff385c;
+            --light: #f7f7f7;
+            --dark: #484848;
+            --card-bg: #fff;
+            --border-color: #eee; /* Added for subtle borders */
 
+            --bg-color: var(--light);
+            --text-color: var(--primary);
+            --nav-bg: #fff;
+            --nav-text: var(--primary);
+            --search-border: var(--accent);
+            --search-shadow: rgba(255, 56, 92, 0.3);
+        }
+        /* Dark theme variables */
+        [data-theme="dark"] {
+            --bg-color: #121212;
+            --text-color: #eee;
+            --nav-bg: #1f1f1f;
+            --nav-text: #ff385c;
+            --search-border: #ff385c;
+            --search-shadow: rgba(255, 56, 92, 0.6);
+            --card-bg: #1f1f1f;
+            --accent: #ff385c;
+            --dark: #ddd;
+            --border-color: #333; /* Dark theme border color */
+        }
+        /* Universal box-sizing */
+        * {
+            box-sizing: border-box;
+        }
+        /* Body styling */
+        body {
+            margin: 0;
+            padding: 0 20px 40px; /* Adjusted padding for better responsiveness */
+            font-family: 'Helvetica Neue', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center content horizontally */
+            min-height: 100vh;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* NAVBAR */
+        nav {
+            width: 100%;
+            max-width: 1200px;
+            background-color: var(--nav-bg);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 25px; /* Slightly increased padding */
+            margin-bottom: 40px;
+            border-radius: 12px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+            gap: 15px; /* Increased space between nav items */
+        }
+        .nav-title {
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--nav-text);
+            letter-spacing: 1.5px; /* Slightly adjusted letter spacing */
+            user-select: none;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+        .nav-links {
+            display: flex;
+            gap: 25px; /* Increased gap between links */
+            margin: 0 20px;
+            flex-wrap: wrap;
+            justify-content: center; /* Center links when wrapped */
+            flex-grow: 1; /* Allow links to take available space */
+        }
+        .nav-links a {
+            color: var(--nav-text);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem; /* Slightly adjusted font size */
+            transition: color 0.3s ease;
+            white-space: nowrap;
+            padding: 5px 0; /* Added vertical padding for better touch targets */
+        }
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+        .nav-search {
+            flex-grow: 1;
+            margin: 0 24px;
+            min-width: 180px; /* Increased minimum width for search input */
+            max-width: 500px; /* Increased max-width for search input */
+        }
+        .nav-search input {
+            width: 100%;
+            padding: 10px 18px; /* Slightly increased padding */
+            font-size: 1.05rem; /* Adjusted font size */
+            border-radius: 9999px;
+            border: 2px solid var(--search-border);
+            box-shadow: 0 2px 8px var(--search-shadow);
+            outline-offset: 2px;
+            transition: box-shadow 0.3s ease, border-color 0.3s ease;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+        .nav-search input::placeholder {
+            color: var(--text-color);
+            opacity: 0.7; /* Slightly more visible placeholder */
+        }
+        .nav-search input:focus {
+            box-shadow: 0 4px 12px var(--search-shadow);
+            border-color: #e0224d;
+        }
+
+        /* Toggle Switch */
+        .toggle-switch {
+            position: relative;
+            width: 55px; /* Slightly wider switch */
+            height: 28px; /* Slightly taller switch */
+            flex-shrink: 0;
+        }
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #ccc;
+            border-radius: 34px;
+            transition: 0.4s;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 22px; /* Slightly larger circle */
+            width: 22px; /* Slightly larger circle */
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            border-radius: 50%;
+            transition: 0.4s;
+        }
+        input:checked + .slider {
+            background-color: var(--accent);
+        }
+        input:checked + .slider:before {
+            transform: translateX(27px); /* Adjusted translation for wider switch */
+        }
+
+        /* Logout button */
+        #logoutButton {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            white-space: nowrap; /* Prevent text wrapping */
+        }
+
+        #logoutButton:hover {
+            background-color: #e0224d;
+            transform: translateY(-2px);
+        }
+        #logoutButton:active {
+            transform: translateY(0);
+        }
+
+        /* Page Title */
+        h1 {
+            font-size: 2.6em; /* Slightly reduced font size for better balance */
+            margin-bottom: 40px;
+            font-weight: 700;
+            color: var(--dark);
+            letter-spacing: 1.5px;
+            user-select: none;
+            text-align: center;
+            line-height: 1.2; /* Improved line height */
+            padding: 0 10px; /* Added horizontal padding */
+        }
+
+        /* Sections */
+        section {
+            width: 100%;
+            max-width: 1200px;
+            margin-bottom: 60px;
+            padding: 0 10px; /* Added horizontal padding to sections */
+            display: none;
+        }
+        section.active {
+            display: block;
+        }
+        section h2 {
+            font-size: 2em;
+            margin-bottom: 24px;
+            color: var(--accent);
+            border-bottom: 3px solid var(--accent);
+            padding-bottom: 8px;
+            font-weight: 600;
+        }
+
+        /* Video grid */
+        .video-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* More flexible grid */
+            gap: 30px; /* Increased gap */
+        }
+        /* Responsive grid adjustments (kept for specific breakpoints if needed, but auto-fit is better) */
+        @media (min-width: 600px) {
+            .video-list {
+                gap: 28px;
+            }
+        }
+        @media (min-width: 900px) {
+            .video-list {
+                gap: 32px;
+            }
+        }
+        @media (min-width: 1200px) {
+            .video-list {
+                gap: 35px;
+            }
+        }
+
+        /* Video cards */
+        .video-wrapper {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+            overflow: hidden;
+            transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--border-color); /* Added subtle border */
+        }
+        .video-wrapper:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+        }
+        iframe {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border: none;
+            display: block;
+            border-radius: 16px 16px 0 0;
+            background: black;
+        }
+        .video-link {
+            text-align: center;
+            padding: 15px 10px; /* Increased padding */
+            font-weight: 600;
+            font-size: 1rem; /* Slightly larger font size */
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px solid var(--border-color); /* Used variable border color */
+            transition: color 0.3s ease;
+            user-select: text;
+        }
+        .video-link:hover {
+            color: #e0224d;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: auto;
+            font-size: 0.9em;
+            color: var(--dark);
+            text-align: center;
+            padding: 20px 0 10px;
+            user-select: none;
+            width: 100%;
+        }
+
+        /* Completed section */
+        .completed-section {
+            max-width: 1200px;
+            width: 100%;
+            margin-bottom: 60px;
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+            padding: 28px 35px; /* Increased padding */
+            user-select: none;
+            border: 1px solid var(--border-color); /* Added subtle border */
+        }
+        .completed-section h2 {
+            color: var(--accent);
+            margin-bottom: 28px; /* Increased margin */
+            font-weight: 600;
+            font-size: 2.2em; /* Slightly larger heading */
+        }
+        .progress-bar-container {
+            background-color: #eee;
+            border-radius: 12px;
+            overflow: hidden;
+            height: 20px; /* Slightly taller progress bar */
+            margin: 15px 0 28px; /* Adjusted margin */
+        }
+        [data-theme="dark"] .progress-bar-container {
+            background-color: #333;
+        }
+        .progress-bar {
+            height: 100%;
+            background-color: var(--accent);
+            width: 0;
+            transition: width 0.6s ease;
+        }
+        .course-progress {
+            font-weight: 600;
+            margin-bottom: 12px; /* Increased margin */
+            color: var(--dark);
+            font-size: 1.05rem; /* Slightly larger font size */
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation bar -->
+    <nav>
+        <a href="#home" class="nav-title">BHAICHARA ON TOP</a>
+        <div class="nav-links">
+            <a href="#cd">CD</a>
+            <a href="#cn">CN</a>
+            <a href="#daa">DAA</a>
+            <a href="#ee">EE</a>
+            <a href="#os">OS</a>
+            <a href="#se">SE</a>
+        </div>
+        <div class="nav-search">
+            <input type="search" id="searchInput" placeholder="Search videos by name..." aria-label="Search videos by name" />
+        </div>
+        <label class="toggle-switch" title="Toggle dark mode">
+            <input type="checkbox" id="modeToggle" aria-label="Toggle dark mode" />
+            <span class="slider"></span>
+        </label>
+        <button id="logoutButton">Logout</button> 
+    </nav>
+
+    <h1 id="pageTitle"></h1>
+
+    <!-- Home Section -->
+    <section id="homeSection" class="active" aria-label="Welcome section">
+        <p class="home-description">
+            Welcome to BhaiChara, your one-stop solution for comprehensive course materials. Use the navigation bar above to explore different subjects, track your progress, and access valuable resources.
+        </p>
+        <div class="completed-section" aria-label="Completed videos and progress">
+            <h2>Course Completion Summary</h2>
+            <div id="completionStats"></div>
+        </div>
+    </section>
+
+    <!-- Video Sections (with unique IDs) -->
+    <section id="cdSection">
+        <h2>CD Videos</h2>
+        <div class="video-list" id="cdList"></div>
+    </section>
+
+    <section id="cnSection">
+        <h2>CN Videos</h2>
+        <div class="video-list" id="cnList"></div>
+    </section>
+
+    <section id="daaSection">
+        <h2>DAA Videos</h2>
+        <div class="video-list" id="daaList"></div>
+    </section>
+
+    <section id="eeSection">
+        <h2>EE Videos</h2>
+        <div class="video-list" id="eeList"></div>
+    </section>
+
+    <section id="osSection">
+        <h2>OS Videos</h2>
+        <div class="video-list" id="osList"></div>
+    </section>
+
+    <section id="seSection">
+        <h2>SE Videos</h2>
+        <div class="video-list" id="seList"></div>
+    </section>
+
+    <!-- Footer -->
+    <div class="footer">© 2025 BhaiChara Pvt Ltd. All rights reserved.</div>
+
+    <script>
+        // Data for videos, each has a `completed` boolean property to track completion.
+        // The `videoUrl` now directly contains the YouTube embed URL.
+        const sectionsData = {
+            se: [
+                { title: "JAVA UNIT - 1", videoUrl: "https://www.youtube.com/embed/4RJT4v0SRDU", completed: false,
+                  notes: [{ name: "JAVA UNIT NOTES - 1", url: "https://drive.google.com/file/d/1vRs3PHZ8kBU7W_gGsjcAm2KlL01fcES2/view?usp=drivesdk" }] },
+                { title: "JAVA UNIT - 2", videoUrl: "https://www.youtube.com/embed/vEv_uYr5Yqk", completed: false,
+                  notes: [{ name: "JAVA UNIT NOTES - 2", url: "https://drive.google.com/file/d/1jfm1wCLbCt4O-O2j4UzljoPP3qt2-18z/view?usp=drivesdk" }] },
+                { title: "JAVA UNIT - 3", videoUrl: "https://www.youtube.com/embed/vOTpZp7-_hM", completed: false,
+                  notes: [{ name: "JAVA UNIT NOTES - 3", url: "https://drive.google.com/file/d/1-1P8hY_4ooVNzGnDjsnSzMec50FT66F1/view?usp=drivesdk" }] },
+                { title: "JAVA UNIT - 4", videoUrl: "https://www.youtube.com/embed/3XlTekglPek", completed: false,
+                  notes: [{ name: "JAVA UNIT NOTES - 4", url: "https://drive.google.com/file/d/1Na2jN-Kfwa0k5LhSD8YrtYa5hWakFO0j/view?usp=drivesdk" }] }
+            ]
+        };
+
+        // Map of route names (from URL hash) to their section IDs and display titles.
+        const routeMap = {
+            'home': { id: 'homeSection', title: 'Welcome to BhaiChara!' },
+            'cd': { id: 'cdSection', dataKey: 'cd', title: 'CD Videos' },
+            'cn': { id: 'cnSection', dataKey: 'cn', title: 'CN Videos' },
+            'daa': { id: 'daaSection', dataKey: 'daa', title: 'DAA Videos' },
+            'ee': { id: 'eeSection', dataKey: 'ee', title: 'EE Videos' },
+            'os': { id: 'osSection', dataKey: 'os', title: 'OS Videos' },
+            'se': { id: 'seSection', dataKey: 'se', title: 'SE Videos' }
+        };
+
+        /**
+         * Renders videos for a specific section into its corresponding container.
+         * @param {string} sectionKey - The key from `sectionsData` (e.g., 'pslp', 'cns').
+         */
+        function renderVideos(sectionKey) {
+            // Do not render videos for the 'home' section as it's a summary page.
+            if (!sectionKey || sectionKey === 'home') return;
+
+            const videos = sectionsData[sectionKey];
+            const container = document.getElementById(sectionKey + "List");
+
+            // Ensure container and video data exist before proceeding.
+            if (!container || !videos) {
+                console.error(`Container or video data not found for section: ${sectionKey}`);
+                return;
+            }
+
+            // Clear existing videos to prevent duplicates on re-render.
+            container.innerHTML = "";
+
+            // Iterate over videos and create HTML elements for each.
+            videos.forEach((video, i) => {
+                const videoEl = document.createElement("div");
+                videoEl.className = "video-wrapper";
+                videoEl.dataset.title = video.title.toLowerCase(); // Store title for search filtering
+
+                videoEl.innerHTML = `
+                    <iframe
+                        src="${video.videoUrl}"
+                        allowfullscreen
+                        loading="lazy"
+                        title="${video.title}"
+                    ></iframe>
+                    <a href="${video.videoUrl}" target="_blank" rel="noopener" class="video-link">${video.title}</a>
+                    <div class="notes-container">
+                        <div class="notes-title">Notes:</div>
+                        <ul class="note-list">
+                            ${video.notes.map(note => `<li><a href="${note.url}" target="_blank" rel="noopener">${note.name}</a></li>`).join('')}
+                        </ul>
+                    </div>
+                    <label style="padding:10px 16px; font-weight:600; cursor:pointer; color: var(--accent); user-select:none;">
+                        <input type="checkbox" data-section="${sectionKey}" data-index="${i}" ${video.completed ? "checked" : ""} /> Mark as completed
+                    </label>
+                `;
+                container.appendChild(videoEl);
+            });
+        }
+
+        /**
+         * Filters videos in the currently active section based on a search term.
+         * @param {string} searchTerm - The text to search for in video titles.
+         */
+        function filterVideos(searchTerm) {
+            const term = searchTerm.toLowerCase();
+            const currentHash = window.location.hash.substring(1) || 'home';
+            const currentRoute = routeMap[currentHash];
+
+            // Only filter if we are on a section that displays videos.
+            if (currentRoute && currentRoute.dataKey) {
+                const container = document.getElementById(currentRoute.dataKey + "List");
+                if (container) {
+                    Array.from(container.children).forEach(videoEl => {
+                        const title = videoEl.dataset.title || "";
+                        // Show/hide video element based on search term inclusion.
+                        videoEl.style.display = title.includes(term) ? "block" : "none";
+                    });
+                }
+            }
+        }
+
+        /**
+         * Calculates and updates the completion statistics and progress bars for all courses.
+         */
+        function updateCompletionStats() {
+            const completionContainer = document.getElementById("completionStats");
+            if (!completionContainer) return; // Exit if container not found
+            completionContainer.innerHTML = ""; // Clear previous stats
+
+            for (const [key, videos] of Object.entries(sectionsData)) {
+                const completedCount = videos.filter(v => v.completed).length;
+                const total = videos.length;
+                const percentage = total === 0 ? 0 : Math.round((completedCount / total) * 100);
+
+                const sectionTitle = key.toUpperCase();
+
+                const sectionDiv = document.createElement("div");
+                sectionDiv.className = "course-progress";
+
+                sectionDiv.innerHTML = `
+                    <div>${sectionTitle}: ${completedCount} / ${total} videos completed (${percentage}%)</div>
+                    <div class="progress-bar-container" aria-label="${sectionTitle} progress bar">
+                        <div class="progress-bar" style="width:${percentage}%;"></div>
+                    </div>
+                `;
+                completionContainer.appendChild(sectionDiv);
+            }
+        }
+
+        /**
+         * Saves the current completion state of all videos to localStorage.
+         */
+        function saveCompleted() {
+            localStorage.setItem("videoCompletion", JSON.stringify(sectionsData));
+        }
+
+        /**
+         * Loads the completion state from localStorage and updates `sectionsData`.
+         */
+        function loadCompleted() {
+            const saved = localStorage.getItem("videoCompletion");
+            if (saved) {
+                const savedData = JSON.parse(saved);
+                // Iterate through saved data and apply it to the `sectionsData`.
+                for (const [key, videos] of Object.entries(savedData)) {
+                    if (sectionsData[key]) { // Check if the section key exists in our data
+                        sectionsData[key].forEach((video, i) => {
+                            // Ensure the saved data has a boolean 'completed' property for the video at this index.
+                            if (typeof videos[i]?.completed === "boolean") {
+                                video.completed = videos[i].completed;
+                            }
+                        });
+                    }
+                }
+            }
+        }
+
+        /**
+         * Initializes the theme (dark/light mode) based on localStorage or system preference.
+         */
+        function initTheme() {
+            const toggle = document.getElementById("modeToggle");
+            const savedTheme = localStorage.getItem("theme");
+
+            if (savedTheme) {
+                document.documentElement.setAttribute("data-theme", savedTheme);
+                toggle.checked = savedTheme === "dark";
+            } else {
+                // Default to system preference if no theme is saved.
+                const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+                document.documentElement.setAttribute("data-theme", prefersDark ? "dark" : "light");
+                toggle.checked = prefersDark;
+            }
+        }
+
+        /**
+         * Handles client-side routing based on the URL hash.
+         * Shows the relevant section and updates the page title.
+         */
+        function handleRouting() {
+            const hash = window.location.hash.substring(1); // Get hash without '#'
+            const routeName = hash || 'home'; // Default to 'home' if no hash is present
+
+            // Hide all sections first.
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Find the target route in our map.
+            const targetRoute = routeMap[routeName];
+            const pageTitleElement = document.getElementById('pageTitle');
+
+            if (targetRoute) {
+                // Show the active section.
+                document.getElementById(targetRoute.id).classList.add('active');
+                // Update the main page title.
+                if (pageTitleElement) {
+                    pageTitleElement.textContent = targetRoute.title;
+                }
+
+                // If the route corresponds to a video section, render its videos.
+                if (targetRoute.dataKey) {
+                    renderVideos(targetRoute.dataKey);
+                    // Clear search input and re-filter for the newly active section.
+                    const searchInput = document.getElementById("searchInput");
+                    if (searchInput) searchInput.value = '';
+                    filterVideos('');
+                }
+            } else {
+                // If an invalid hash, redirect to home page.
+                window.location.hash = '#home';
+                if (pageTitleElement) {
+                    pageTitleElement.textContent = routeMap['home'].title;
+                }
+            }
+        }
+
+        // NEW: Logout Function
+        function logout() {
+            localStorage.removeItem('isAuthenticated'); // Remove the authentication flag
+            window.location.href = 'index.html'; // Redirect to the login page
+        }
+
+        // Event Listeners Setup - executed once the DOM is fully loaded.
+        document.addEventListener("DOMContentLoaded", () => {
+            // Check authentication status FIRST
+            const isAuthenticated = localStorage.getItem('isAuthenticated');
+            if (isAuthenticated !== 'true') {
+                // If not authenticated, redirect to the login page
+                window.location.href = 'index.html';
+                return; // Stop further execution of this script
+            }
+
+            loadCompleted(); // Load completion data from localStorage.
+            updateCompletionStats(); // Update progress bars and stats.
+            initTheme(); // Set initial dark/light mode.
+
+            // Handle initial routing when the page loads (e.g., if a user loads with #pslp).
+            handleRouting();
+
+            // Listen for hash changes in the URL (e.g., when navigation links are clicked).
+            window.addEventListener('hashchange', handleRouting);
+
+            // Event listener for the search input.
+            const searchInput = document.getElementById("searchInput");
+            if (searchInput) {
+                searchInput.addEventListener("input", (e) => {
+                    filterVideos(e.target.value);
+                });
+            }
+
+            // Event delegation for handling video completion checkboxes.
+            document.body.addEventListener("change", (e) => {
+                // Check if the changed element is a completion checkbox.
+                if (e.target.matches('input[type="checkbox"][data-section][data-index]')) {
+                    const section = e.target.dataset.section;
+                    const index = parseInt(e.target.dataset.index);
+
+                    // Update the completion status in our data model.
+                    if (sectionsData[section] && sectionsData[section][index]) {
+                        sectionsData[section][index].completed = e.target.checked;
+                        saveCompleted(); // Save updated state to localStorage.
+                        updateCompletionStats(); // Re-calculate and display progress.
+                    }
+                }
+            });
+
+            // Event listener for the dark mode toggle switch.
+            const modeToggle = document.getElementById("modeToggle");
+            if (modeToggle) {
+                modeToggle.addEventListener("change", () => {
+                    if (modeToggle.checked) {
+                        document.documentElement.setAttribute("data-theme", "dark");
+                        localStorage.setItem("theme", "dark"); // Save theme preference.
+                    } else {
+                        document.documentElement.setAttribute("data-theme", "light");
+                        localStorage.setItem("theme", "light"); // Save theme preference.
+                    }
+                });
+            }
+
+            // NEW: Event listener for the logout button
+            const logoutButton = document.getElementById('logoutButton');
+            if (logoutButton) {
+                logoutButton.addEventListener('click', logout);
+            }
+        });
+    </script>
+</body>
+</html>
