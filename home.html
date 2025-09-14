@@ -278,40 +278,6 @@
             color: #e0224d;
         }
 
-        /* Notes container */
-        .notes-container {
-            padding: 15px 20px 20px; /* Adjusted padding */
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        .notes-title {
-            font-weight: 600;
-            margin-bottom: 12px; /* Increased margin */
-            color: var(--dark);
-            font-size: 1rem;
-        }
-        .note-list {
-            list-style: none;
-            padding-left: 0;
-            margin: 0;
-            flex-grow: 1;
-            overflow-y: auto;
-        }
-        .note-list li {
-            margin-bottom: 10px; /* Increased margin */
-        }
-        .note-list a {
-            color: var(--accent);
-            text-decoration: none;
-            font-size: 0.95rem; /* Slightly larger font size */
-            transition: color 0.3s ease;
-        }
-        .note-list a:hover {
-            color: #e0224d;
-            text-decoration: underline;
-        }
-
         /* Footer */
         .footer {
             margin-top: auto;
@@ -363,114 +329,10 @@
             color: var(--dark);
             font-size: 1.05rem; /* Slightly larger font size */
         }
-
-        /* Media queries for responsive navbar */
-        @media (max-width: 768px) {
-            nav {
-                flex-direction: column;
-                align-items: center;
-                padding: 15px;
-            }
-            .nav-search {
-                order: 3;
-                width: 100%;
-                margin: 15px 0 10px; /* Adjusted margin */
-            }
-            .nav-links {
-                order: 2;
-                margin: 10px 0;
-                width: 100%;
-                justify-content: space-around;
-                gap: 15px; /* Adjusted gap for smaller screens */
-            }
-            .nav-title {
-                order: 1;
-                margin-bottom: 10px;
-            }
-            .toggle-switch {
-                order: 4;
-                margin-top: 10px;
-            }
-            /* Logout button positioning for small screens */
-            #logoutButton {
-                order: 5; /* Place it after the toggle switch */
-                margin-top: 10px;
-                width: 100%;
-            }
-        }
-
-        /* Further adjustments for very small screens */
-        @media (max-width: 480px) {
-            body {
-                padding: 0 15px 30px;
-            }
-            nav {
-                padding: 10px 15px;
-                gap: 10px;
-            }
-            .nav-title {
-                font-size: 1.5rem;
-            }
-            .nav-links {
-                gap: 10px;
-                font-size: 0.95rem;
-            }
-            .nav-search input {
-                padding: 8px 15px;
-                font-size: 0.95rem;
-            }
-            h1 {
-                font-size: 2em;
-                margin-bottom: 30px;
-            }
-            section h2 {
-                font-size: 1.8em;
-                margin-bottom: 20px;
-            }
-            .video-list {
-                gap: 20px;
-            }
-            .video-link {
-                font-size: 0.9rem;
-            }
-            .notes-title {
-                font-size: 0.9rem;
-            }
-            .note-list a {
-                font-size: 0.85rem;
-            }
-            .completed-section {
-                padding: 20px 25px;
-            }
-            .completed-section h2 {
-                font-size: 1.8em;
-            }
-            .course-progress {
-                font-size: 0.95rem;
-            }
-        }
-
-        /* New style for centering the welcome paragraph */
-        .home-description {
-            margin: 0 auto 20px auto; /* Centers the block and adds bottom margin */
-            text-align: center;
-            font-size: 1.2em;
-            max-width: 800px;
-            line-height: 1.6;
-        }
     </style>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D1B7FE0ZE7"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-D1B7FE0ZE7');
-    </script>
 </head>
 <body>
-
+    <!-- Navigation bar -->
     <nav>
         <a href="#home" class="nav-title">BHAICHARA ON TOP</a>
         <div class="nav-links">
@@ -488,10 +350,12 @@
             <input type="checkbox" id="modeToggle" aria-label="Toggle dark mode" />
             <span class="slider"></span>
         </label>
-        <button id="logoutButton">Logout</button> </nav>
+        <button id="logoutButton">Logout</button> 
+    </nav>
 
     <h1 id="pageTitle"></h1>
 
+    <!-- Home Section -->
     <section id="homeSection" class="active" aria-label="Welcome section">
         <p class="home-description">
             Welcome to BhaiChara, your one-stop solution for comprehensive course materials. Use the navigation bar above to explore different subjects, track your progress, and access valuable resources.
@@ -502,377 +366,323 @@
         </div>
     </section>
 
-    <section id="pslpSection">
-        <h2>N/A</h2>
+    <!-- Video Sections (with unique IDs) -->
+    <section id="cdSection">
+        <h2>CD Videos</h2>
         <div class="video-list" id="cdList"></div>
     </section>
 
-    <section id="cnsSection">
-        <h2>N/A</h2>
+    <section id="cnSection">
+        <h2>CN Videos</h2>
         <div class="video-list" id="cnList"></div>
     </section>
 
-    <section id="dbmsSection">
-        <h2>DBMS</h2>
+    <section id="daaSection">
+        <h2>DAA Videos</h2>
         <div class="video-list" id="daaList"></div>
     </section>
 
-    <section id="javaSection">
-        <h2>JAVA</h2>
+    <section id="eeSection">
+        <h2>EE Videos</h2>
         <div class="video-list" id="eeList"></div>
     </section>
 
-    <section id="tocSection">
-        <h2>N/A</h2>
+    <section id="osSection">
+        <h2>OS Videos</h2>
         <div class="video-list" id="osList"></div>
     </section>
 
-     <section id="tocSection">
-        <h2>N/A</h2>
+    <section id="seSection">
+        <h2>SE Videos</h2>
         <div class="video-list" id="seList"></div>
     </section>
 
+    <!-- Footer -->
     <div class="footer">© 2025 BhaiChara Pvt Ltd. All rights reserved.</div>
 
-<script>
-    // Data for videos, each has a `completed` boolean property to track completion.
-    // The `videoUrl` now directly contains the YouTube embed URL.
-    // IMPORTANT: Replace these placeholder URLs with your actual YouTube video embed URLs.
-   const sectionsData = {
-    // pslp: [
-    //     { title: "PSLP UNIT - 1", videoUrl: "https://www.youtube.com/embed/aRvyN1omlhc", completed: false,
-    //       notes: [{ name: "PSLP UNIT NOTES - 1", url: "https://drive.google.com/file/d/1HYu_uE8VHuaSUSWMW7Z3ElR2P1pDUIZQ/view?usp=drivesdk" }] },
-    //     { title: "PSLP UNIT - 2", videoUrl: "https://www.youtube.com/embed/olDzHZaKYDo", completed: false,
-    //       notes: [{ name: "PSLP UNIT NOTES - 2", url: "https://drive.google.com/file/d/1HJXGq0ul0IeoR5PZw8ebPeIgXg8qY0xk/view?usp=drivesdk" }] },
-    //     { title: "PSLP UNIT - 3", videoUrl: "https://www.youtube.com/embed/niDbghcNdS8", completed: false,
-    //       notes: [{ name: "PSLP UNIT NOTES - 3", url: "https://drive.google.com/file/d/1HJm00hRjofmKLrVQfU9eLRpXA4y_vIXd/view?usp=drivesdk" }] },
-    //     { title: "PSLP UNIT - 3", videoUrl: "https://www.youtube.com/embed/pwlnzSS2ILI", completed: false,
-    //       notes: [{ name: "PSLP UNIT NOTES - 3", url: "https://drive.google.com/file/d/1HJm00hRjofmKLrVQfU9eLRpXA4y_vIXd/view?usp=drivesdk" }] },
-    //     { title: "PSLP UNIT - 4", videoUrl: "https://www.youtube.com/embed/UmPmTv2YQB8", completed: false,
-    //       notes: [{ name: "PSLP UNIT NOTES - 4", url: "https://drive.google.com/file/d/1HVXUe1YMeiYqcQvnsl3ez3YuSWO-P2Pm/view?usp=drivesdk" }] }
-    // ],
+    <script>
+        // Data for videos, each has a `completed` boolean property to track completion.
+        // The `videoUrl` now directly contains the YouTube embed URL.
+        const sectionsData = {
+            se: [
+                { title: "JAVA UNIT - 1", videoUrl: "https://www.youtube.com/embed/4RJT4v0SRDU", completed: false,
+                  notes: [{ name: "JAVA UNIT NOTES - 1", url: "https://drive.google.com/file/d/1vRs3PHZ8kBU7W_gGsjcAm2KlL01fcES2/view?usp=drivesdk" }] },
+                { title: "JAVA UNIT - 2", videoUrl: "https://www.youtube.com/embed/vEv_uYr5Yqk", completed: false,
+                  notes: [{ name: "JAVA UNIT NOTES - 2", url: "https://drive.google.com/file/d/1jfm1wCLbCt4O-O2j4UzljoPP3qt2-18z/view?usp=drivesdk" }] },
+                { title: "JAVA UNIT - 3", videoUrl: "https://www.youtube.com/embed/vOTpZp7-_hM", completed: false,
+                  notes: [{ name: "JAVA UNIT NOTES - 3", url: "https://drive.google.com/file/d/1-1P8hY_4ooVNzGnDjsnSzMec50FT66F1/view?usp=drivesdk" }] },
+                { title: "JAVA UNIT - 4", videoUrl: "https://www.youtube.com/embed/3XlTekglPek", completed: false,
+                  notes: [{ name: "JAVA UNIT NOTES - 4", url: "https://drive.google.com/file/d/1Na2jN-Kfwa0k5LhSD8YrtYa5hWakFO0j/view?usp=drivesdk" }] }
+            ]
+        };
 
-    // cns: [
-    //     { title: "CNS UNIT - 1", videoUrl: "https://www.youtube.com/embed/DQhxgvR--xI", completed: false,
-    //       notes: [{ name: "CNS UNIT NOTES - 1", url: "https://drive.google.com/file/d/1B3TyqEUOVXOQL4L4DWI_u5YjWR-F3sqN/view?usp=drivesdk" }] },
-    //     { title: "CNS UNIT - 2", videoUrl: "https://www.youtube.com/embed/Vtr4bHFXu40", completed: false,
-    //       notes: [{ name: "CNS UNIT NOTES - 2", url: "https://drive.google.com/file/d/1HgOInK4cEOgjKj2mn68dfo5c73v5zXPb/view?usp=drivesdk" }] },
-    //     { title: "CNS UNIT - 3", videoUrl: "https://www.youtube.com/embed/yxWOPbWu1EI", completed: false,
-    //       notes: [{ name: "CNS UNIT NOTES - 3", url: "https://docs" }] },
-    //     { title: "CNS UNIT - 4", videoUrl: "https://www.youtube.com/embed/Ht1AhZj_lkw", completed: false,
-    //       notes: [{ name: "CNS UNIT NOTES - 4", url: "https://docs.google.com/document/d/your-doc-id-2" }] }
-    // ],
+        // Map of route names (from URL hash) to their section IDs and display titles.
+        const routeMap = {
+            'home': { id: 'homeSection', title: 'Welcome to BhaiChara!' },
+            'cd': { id: 'cdSection', dataKey: 'cd', title: 'CD Videos' },
+            'cn': { id: 'cnSection', dataKey: 'cn', title: 'CN Videos' },
+            'daa': { id: 'daaSection', dataKey: 'daa', title: 'DAA Videos' },
+            'ee': { id: 'eeSection', dataKey: 'ee', title: 'EE Videos' },
+            'os': { id: 'osSection', dataKey: 'os', title: 'OS Videos' },
+            'se': { id: 'seSection', dataKey: 'se', title: 'SE Videos' }
+        };
 
-    // dbms: [
-    //     { title: "DBMS UNIT - 1", videoUrl: "https://www.youtube.com/embed/ScWOVJAMMe8", completed: false,
-    //       notes: [{ name: "DBMS UNIT NOTES - 1", url: "https://docs.google.com/document/d/your-doc-id-3" }] },
-    //     { title: "DBMS UNIT - 2", videoUrl: "https://www.youtube.com/embed/mk9F0N6DnDk", completed: false,
-    //       notes: [{ name: "DBMS UNIT NOTES - 2", url: "https://docs.google.com/document/d/your-doc-id-3" }] },
-    //     { title: "DBMS UNIT - 3", videoUrl: "https://www.youtube.com/embed/FO1xi9fkSD8", completed: false,
-    //       notes: [{ name: "DBMS UNIT NOTES - 3", url: "https://docs.google.com/document/d/your-doc-id-3" }] },
-    //     { title: "DBMS UNIT - 4", videoUrl: "https://www.youtube.com/embed/FO1xi9fkSD8", completed: false,
-    //       notes: [{ name: "DBMS UNIT NOTES - 4", url: "https://docs.google.com/document/d/your-doc-id-3" }] }
-    // ],
+        /**
+         * Renders videos for a specific section into its corresponding container.
+         * @param {string} sectionKey - The key from `sectionsData` (e.g., 'pslp', 'cns').
+         */
+        function renderVideos(sectionKey) {
+            // Do not render videos for the 'home' section as it's a summary page.
+            if (!sectionKey || sectionKey === 'home') return;
 
-    se: [
-        { title: "JAVA UNIT - 1", videoUrl: "https://www.youtube.com/embed/4RJT4v0SRDU", completed: false,
-          notes: [{ name: "JAVA UNIT NOTES - 1", url: "https://drive.google.com/file/d/1vRs3PHZ8kBU7W_gGsjcAm2KlL01fcES2/view?usp=drivesdk" }] },
-        { title: "JAVA UNIT - 2", videoUrl: "https://www.youtube.com/embed/vEv_uYr5Yqk", completed: false,
-          notes: [{ name: "JAVA UNIT NOTES - 2", url: "https://drive.google.com/file/d/1jfm1wCLbCt4O-O2j4UzljoPP3qt2-18z/view?usp=drivesdk" }] },
-        { title: "JAVA UNIT - 3", videoUrl: "https://www.youtube.com/embed/vOTpZp7-_hM", completed: false,
-          notes: [{ name: "JAVA UNIT NOTES - 3", url: "https://drive.google.com/file/d/1-1P8hY_4ooVNzGnDjsnSzMec50FT66F1/view?usp=drivesdk" }] },
-        { title: "JAVA UNIT - 4", videoUrl: "https://www.youtube.com/embed/3XlTekglPek", completed: false,
-          notes: [{ name: "JAVA UNIT NOTES - 4", url: "https://drive.google.com/file/d/1Na2jN-Kfwa0k5LhSD8YrtYa5hWakFO0j/view?usp=drivesdk" }] }
-    ],
+            const videos = sectionsData[sectionKey];
+            const container = document.getElementById(sectionKey + "List");
 
-    // toc: [
-    //     { title: "TOC UNIT - 1", videoUrl: "https://www.youtube.com/embed/JqkE7iFDsUs", completed: false,
-    //       notes: [{ name: "TOC UNIT NOTES - 1", url: "https://docs.google.com/document/d/your-doc-id-5" }] },
-    //     { title: "TOC UNIT - 2", videoUrl: "https://www.youtube.com/embed/yidPH5-4E7I", completed: false,
-    //       notes: [{ name: "TOC UNIT NOTES - 2", url: "https://docs.google.com/document/d/your-doc-id-5" }] },
-    //     { title: "TOC UNIT - 3", videoUrl: "https://www.youtube.com/embed/e5Ru5PTtKy4", completed: false,
-    //       notes: [{ name: "TOC UNIT NOTES - 3", url: "https://docs.google.com/document/d/your-doc-id-5" }] },
-    //     { title: "TOC UNIT - 4", videoUrl: "https://www.youtube.com/embed/iUktE-wKrjY", completed: false,
-    //       notes: [{ name: "TOC UNIT NOTES - 4", url: "https://docs.google.com/document/d/your-doc-id-5" }] }
-    // ]
-};
-
-
-    // Map of route names (from URL hash) to their section IDs and display titles.
-    // dataKey refers to the key in the sectionsData object for video content.
-    const routeMap = {
-        'home': { id: 'homeSection', title: 'Welcome to BhaiChara!' },
-        'cd': { id: 'cdSection', dataKey: 'cd', title: 'CD Videos' },
-        'cn': { id: 'cnSection', dataKey: 'cn', title: 'CN Videos' },
-        'daa': { id: 'daaSection', dataKey: 'daa', title: 'DAA Videos' },
-        'ee': { id: 'eeSection', dataKey: 'ee', title: 'EE Videos' },
-        'os': { id: 'osSection', dataKey: 'os', title: 'OS Videos' },
-        'se': { id: 'seSection', dataKey: 'se', title: 'SE Videos' }
-    };
-
-    /**
-     * Renders videos for a specific section into its corresponding container.
-     * @param {string} sectionKey - The key from `sectionsData` (e.g., 'pslp', 'cns').
-     */
-    function renderVideos(sectionKey) {
-        // Do not render videos for the 'home' section as it's a summary page.
-        if (!sectionKey || sectionKey === 'home') return;
-
-        const videos = sectionsData[sectionKey];
-        const container = document.getElementById(sectionKey + "List");
-
-        // Ensure container and video data exist before proceeding.
-        if (!container || !videos) {
-            console.error(`Container or video data not found for section: ${sectionKey}`);
-            return;
-        }
-
-        // Clear existing videos to prevent duplicates on re-render.
-        container.innerHTML = "";
-
-        // Iterate over videos and create HTML elements for each.
-        videos.forEach((video, i) => {
-            const videoEl = document.createElement("div");
-            videoEl.className = "video-wrapper";
-            videoEl.dataset.title = video.title.toLowerCase(); // Store title for search filtering
-
-            videoEl.innerHTML = `
-                <iframe
-                    src="${video.videoUrl}"
-                    allowfullscreen
-                    loading="lazy"
-                    title="${video.title}"
-                ></iframe>
-                <a href="${video.videoUrl}" target="_blank" rel="noopener" class="video-link">${video.title}</a>
-                <div class="notes-container">
-                    <div class="notes-title">Notes:</div>
-                    <ul class="note-list">
-                        ${video.notes.map(note => `<li><a href="${note.url}" target="_blank" rel="noopener">${note.name}</a></li>`).join('')}
-                    </ul>
-                </div>
-                <label style="padding:10px 16px; font-weight:600; cursor:pointer; color: var(--accent); user-select:none;">
-                    <input type="checkbox" data-section="${sectionKey}" data-index="${i}" ${video.completed ? "checked" : ""} /> Mark as completed
-                </label>
-            `;
-            container.appendChild(videoEl);
-        });
-    }
-
-    /**
-     * Filters videos in the currently active section based on a search term.
-     * @param {string} searchTerm - The text to search for in video titles.
-     */
-    function filterVideos(searchTerm) {
-        const term = searchTerm.toLowerCase();
-        const currentHash = window.location.hash.substring(1) || 'home';
-        const currentRoute = routeMap[currentHash];
-
-        // Only filter if we are on a section that displays videos.
-        if (currentRoute && currentRoute.dataKey) {
-            const container = document.getElementById(currentRoute.dataKey + "List");
-            if (container) {
-                Array.from(container.children).forEach(videoEl => {
-                    const title = videoEl.dataset.title || "";
-                    // Show/hide video element based on search term inclusion.
-                    videoEl.style.display = title.includes(term) ? "block" : "none";
-                });
+            // Ensure container and video data exist before proceeding.
+            if (!container || !videos) {
+                console.error(`Container or video data not found for section: ${sectionKey}`);
+                return;
             }
+
+            // Clear existing videos to prevent duplicates on re-render.
+            container.innerHTML = "";
+
+            // Iterate over videos and create HTML elements for each.
+            videos.forEach((video, i) => {
+                const videoEl = document.createElement("div");
+                videoEl.className = "video-wrapper";
+                videoEl.dataset.title = video.title.toLowerCase(); // Store title for search filtering
+
+                videoEl.innerHTML = `
+                    <iframe
+                        src="${video.videoUrl}"
+                        allowfullscreen
+                        loading="lazy"
+                        title="${video.title}"
+                    ></iframe>
+                    <a href="${video.videoUrl}" target="_blank" rel="noopener" class="video-link">${video.title}</a>
+                    <div class="notes-container">
+                        <div class="notes-title">Notes:</div>
+                        <ul class="note-list">
+                            ${video.notes.map(note => `<li><a href="${note.url}" target="_blank" rel="noopener">${note.name}</a></li>`).join('')}
+                        </ul>
+                    </div>
+                    <label style="padding:10px 16px; font-weight:600; cursor:pointer; color: var(--accent); user-select:none;">
+                        <input type="checkbox" data-section="${sectionKey}" data-index="${i}" ${video.completed ? "checked" : ""} /> Mark as completed
+                    </label>
+                `;
+                container.appendChild(videoEl);
+            });
         }
-    }
 
-    /**
-     * Calculates and updates the completion statistics and progress bars for all courses.
-     */
-    function updateCompletionStats() {
-        const completionContainer = document.getElementById("completionStats");
-        if (!completionContainer) return; // Exit if container not found
-        completionContainer.innerHTML = ""; // Clear previous stats
+        /**
+         * Filters videos in the currently active section based on a search term.
+         * @param {string} searchTerm - The text to search for in video titles.
+         */
+        function filterVideos(searchTerm) {
+            const term = searchTerm.toLowerCase();
+            const currentHash = window.location.hash.substring(1) || 'home';
+            const currentRoute = routeMap[currentHash];
 
-        for (const [key, videos] of Object.entries(sectionsData)) {
-            const completedCount = videos.filter(v => v.completed).length;
-            const total = videos.length;
-            const percentage = total === 0 ? 0 : Math.round((completedCount / total) * 100);
-
-            const sectionTitle = key.toUpperCase();
-
-            const sectionDiv = document.createElement("div");
-            sectionDiv.className = "course-progress";
-
-            sectionDiv.innerHTML = `
-                <div>${sectionTitle}: ${completedCount} / ${total} videos completed (${percentage}%)</div>
-                <div class="progress-bar-container" aria-label="${sectionTitle} progress bar">
-                    <div class="progress-bar" style="width:${percentage}%;"></div>
-                </div>
-            `;
-            completionContainer.appendChild(sectionDiv);
-        }
-    }
-
-    /**
-     * Saves the current completion state of all videos to localStorage.
-     */
-    function saveCompleted() {
-        localStorage.setItem("videoCompletion", JSON.stringify(sectionsData));
-    }
-
-    /**
-     * Loads the completion state from localStorage and updates `sectionsData`.
-     */
-    function loadCompleted() {
-        const saved = localStorage.getItem("videoCompletion");
-        if (saved) {
-            const savedData = JSON.parse(saved);
-            // Iterate through saved data and apply it to the `sectionsData`.
-            for (const [key, videos] of Object.entries(savedData)) {
-                if (sectionsData[key]) { // Check if the section key exists in our data
-                    sectionsData[key].forEach((video, i) => {
-                        // Ensure the saved data has a boolean 'completed' property for the video at this index.
-                        if (typeof videos[i]?.completed === "boolean") {
-                            video.completed = videos[i].completed;
-                        }
+            // Only filter if we are on a section that displays videos.
+            if (currentRoute && currentRoute.dataKey) {
+                const container = document.getElementById(currentRoute.dataKey + "List");
+                if (container) {
+                    Array.from(container.children).forEach(videoEl => {
+                        const title = videoEl.dataset.title || "";
+                        // Show/hide video element based on search term inclusion.
+                        videoEl.style.display = title.includes(term) ? "block" : "none";
                     });
                 }
             }
         }
-    }
 
-    /**
-     * Initializes the theme (dark/light mode) based on localStorage or system preference.
-     */
-    function initTheme() {
-        const toggle = document.getElementById("modeToggle");
-        const savedTheme = localStorage.getItem("theme");
+        /**
+         * Calculates and updates the completion statistics and progress bars for all courses.
+         */
+        function updateCompletionStats() {
+            const completionContainer = document.getElementById("completionStats");
+            if (!completionContainer) return; // Exit if container not found
+            completionContainer.innerHTML = ""; // Clear previous stats
 
-        if (savedTheme) {
-            document.documentElement.setAttribute("data-theme", savedTheme);
-            toggle.checked = savedTheme === "dark";
-        } else {
-            // Default to system preference if no theme is saved.
-            const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-            document.documentElement.setAttribute("data-theme", prefersDark ? "dark" : "light");
-            toggle.checked = prefersDark;
-        }
-    }
+            for (const [key, videos] of Object.entries(sectionsData)) {
+                const completedCount = videos.filter(v => v.completed).length;
+                const total = videos.length;
+                const percentage = total === 0 ? 0 : Math.round((completedCount / total) * 100);
 
-    /**
-     * Handles client-side routing based on the URL hash.
-     * Shows the relevant section and updates the page title.
-     */
-    function handleRouting() {
-        const hash = window.location.hash.substring(1); // Get hash without '#'
-        const routeName = hash || 'home'; // Default to 'home' if no hash is present
+                const sectionTitle = key.toUpperCase();
 
-        // Hide all sections first.
-        document.querySelectorAll('section').forEach(section => {
-            section.classList.remove('active');
-        });
+                const sectionDiv = document.createElement("div");
+                sectionDiv.className = "course-progress";
 
-        // Find the target route in our map.
-        const targetRoute = routeMap[routeName];
-        const pageTitleElement = document.getElementById('pageTitle');
-
-        if (targetRoute) {
-            // Show the active section.
-            document.getElementById(targetRoute.id).classList.add('active');
-            // Update the main page title.
-            if (pageTitleElement) {
-                pageTitleElement.textContent = targetRoute.title;
+                sectionDiv.innerHTML = `
+                    <div>${sectionTitle}: ${completedCount} / ${total} videos completed (${percentage}%)</div>
+                    <div class="progress-bar-container" aria-label="${sectionTitle} progress bar">
+                        <div class="progress-bar" style="width:${percentage}%;"></div>
+                    </div>
+                `;
+                completionContainer.appendChild(sectionDiv);
             }
+        }
 
-            // If the route corresponds to a video section, render its videos.
-            if (targetRoute.dataKey) {
-                renderVideos(targetRoute.dataKey);
-                // Clear search input and re-filter for the newly active section.
-                const searchInput = document.getElementById("searchInput");
-                if (searchInput) searchInput.value = '';
-                filterVideos('');
+        /**
+         * Saves the current completion state of all videos to localStorage.
+         */
+        function saveCompleted() {
+            localStorage.setItem("videoCompletion", JSON.stringify(sectionsData));
+        }
+
+        /**
+         * Loads the completion state from localStorage and updates `sectionsData`.
+         */
+        function loadCompleted() {
+            const saved = localStorage.getItem("videoCompletion");
+            if (saved) {
+                const savedData = JSON.parse(saved);
+                // Iterate through saved data and apply it to the `sectionsData`.
+                for (const [key, videos] of Object.entries(savedData)) {
+                    if (sectionsData[key]) { // Check if the section key exists in our data
+                        sectionsData[key].forEach((video, i) => {
+                            // Ensure the saved data has a boolean 'completed' property for the video at this index.
+                            if (typeof videos[i]?.completed === "boolean") {
+                                video.completed = videos[i].completed;
+                            }
+                        });
+                    }
+                }
+            }
+        }
+
+        /**
+         * Initializes the theme (dark/light mode) based on localStorage or system preference.
+         */
+        function initTheme() {
+            const toggle = document.getElementById("modeToggle");
+            const savedTheme = localStorage.getItem("theme");
+
+            if (savedTheme) {
+                document.documentElement.setAttribute("data-theme", savedTheme);
+                toggle.checked = savedTheme === "dark";
             } else {
-                // If on the home page, clear search input as there are no videos to filter directly.
-                const searchInput = document.getElementById("searchInput");
-                if (searchInput) searchInput.value = '';
-                // Ensure no videos are displayed if the search input was previously active on a video page.
-                // This is handled by `section.style.display = 'none'` in filterVideos if dataKey is null.
-            }
-        } else {
-            // If an invalid hash, redirect to home page.
-            window.location.hash = '#home';
-            if (pageTitleElement) {
-                pageTitleElement.textContent = routeMap['home'].title;
+                // Default to system preference if no theme is saved.
+                const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+                document.documentElement.setAttribute("data-theme", prefersDark ? "dark" : "light");
+                toggle.checked = prefersDark;
             }
         }
-    }
 
-    // NEW: Logout Function
-    function logout() {
-        localStorage.removeItem('isAuthenticated'); // Remove the authentication flag
-        window.location.href = 'index.html'; // Redirect to the login page
-    }
+        /**
+         * Handles client-side routing based on the URL hash.
+         * Shows the relevant section and updates the page title.
+         */
+        function handleRouting() {
+            const hash = window.location.hash.substring(1); // Get hash without '#'
+            const routeName = hash || 'home'; // Default to 'home' if no hash is present
 
-    // Event Listeners Setup - executed once the DOM is fully loaded.
-    document.addEventListener("DOMContentLoaded", () => {
-        // Check authentication status FIRST
-        const isAuthenticated = localStorage.getItem('isAuthenticated');
-        if (isAuthenticated !== 'true') {
-            // If not authenticated, redirect to the login page
-            window.location.href = 'index.html';
-            return; // Stop further execution of this script
-        }
-
-        loadCompleted(); // Load completion data from localStorage.
-        updateCompletionStats(); // Update progress bars and stats.
-        initTheme(); // Set initial dark/light mode.
-
-        // Handle initial routing when the page loads (e.g., if a user loads with #pslp).
-        handleRouting();
-
-        // Listen for hash changes in the URL (e.g., when navigation links are clicked).
-        window.addEventListener('hashchange', handleRouting);
-
-        // Event listener for the search input.
-        const searchInput = document.getElementById("searchInput");
-        if (searchInput) {
-            searchInput.addEventListener("input", (e) => {
-                filterVideos(e.target.value);
+            // Hide all sections first.
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.remove('active');
             });
+
+            // Find the target route in our map.
+            const targetRoute = routeMap[routeName];
+            const pageTitleElement = document.getElementById('pageTitle');
+
+            if (targetRoute) {
+                // Show the active section.
+                document.getElementById(targetRoute.id).classList.add('active');
+                // Update the main page title.
+                if (pageTitleElement) {
+                    pageTitleElement.textContent = targetRoute.title;
+                }
+
+                // If the route corresponds to a video section, render its videos.
+                if (targetRoute.dataKey) {
+                    renderVideos(targetRoute.dataKey);
+                    // Clear search input and re-filter for the newly active section.
+                    const searchInput = document.getElementById("searchInput");
+                    if (searchInput) searchInput.value = '';
+                    filterVideos('');
+                }
+            } else {
+                // If an invalid hash, redirect to home page.
+                window.location.hash = '#home';
+                if (pageTitleElement) {
+                    pageTitleElement.textContent = routeMap['home'].title;
+                }
+            }
         }
 
-        // Event delegation for handling video completion checkboxes.
-        document.body.addEventListener("change", (e) => {
-            // Check if the changed element is a completion checkbox.
-            if (e.target.matches('input[type="checkbox"][data-section][data-index]')) {
-                const section = e.target.dataset.section;
-                const index = parseInt(e.target.dataset.index);
+        // NEW: Logout Function
+        function logout() {
+            localStorage.removeItem('isAuthenticated'); // Remove the authentication flag
+            window.location.href = 'index.html'; // Redirect to the login page
+        }
 
-                // Update the completion status in our data model.
-                if (sectionsData[section] && sectionsData[section][index]) {
-                    sectionsData[section][index].completed = e.target.checked;
-                    saveCompleted(); // Save updated state to localStorage.
-                    updateCompletionStats(); // Re-calculate and display progress.
+        // Event Listeners Setup - executed once the DOM is fully loaded.
+        document.addEventListener("DOMContentLoaded", () => {
+            // Check authentication status FIRST
+            const isAuthenticated = localStorage.getItem('isAuthenticated');
+            if (isAuthenticated !== 'true') {
+                // If not authenticated, redirect to the login page
+                window.location.href = 'index.html';
+                return; // Stop further execution of this script
+            }
+
+            loadCompleted(); // Load completion data from localStorage.
+            updateCompletionStats(); // Update progress bars and stats.
+            initTheme(); // Set initial dark/light mode.
+
+            // Handle initial routing when the page loads (e.g., if a user loads with #pslp).
+            handleRouting();
+
+            // Listen for hash changes in the URL (e.g., when navigation links are clicked).
+            window.addEventListener('hashchange', handleRouting);
+
+            // Event listener for the search input.
+            const searchInput = document.getElementById("searchInput");
+            if (searchInput) {
+                searchInput.addEventListener("input", (e) => {
+                    filterVideos(e.target.value);
+                });
+            }
+
+            // Event delegation for handling video completion checkboxes.
+            document.body.addEventListener("change", (e) => {
+                // Check if the changed element is a completion checkbox.
+                if (e.target.matches('input[type="checkbox"][data-section][data-index]')) {
+                    const section = e.target.dataset.section;
+                    const index = parseInt(e.target.dataset.index);
+
+                    // Update the completion status in our data model.
+                    if (sectionsData[section] && sectionsData[section][index]) {
+                        sectionsData[section][index].completed = e.target.checked;
+                        saveCompleted(); // Save updated state to localStorage.
+                        updateCompletionStats(); // Re-calculate and display progress.
+                    }
                 }
+            });
+
+            // Event listener for the dark mode toggle switch.
+            const modeToggle = document.getElementById("modeToggle");
+            if (modeToggle) {
+                modeToggle.addEventListener("change", () => {
+                    if (modeToggle.checked) {
+                        document.documentElement.setAttribute("data-theme", "dark");
+                        localStorage.setItem("theme", "dark"); // Save theme preference.
+                    } else {
+                        document.documentElement.setAttribute("data-theme", "light");
+                        localStorage.setItem("theme", "light"); // Save theme preference.
+                    }
+                });
+            }
+
+            // NEW: Event listener for the logout button
+            const logoutButton = document.getElementById('logoutButton');
+            if (logoutButton) {
+                logoutButton.addEventListener('click', logout);
             }
         });
-
-        // Event listener for the dark mode toggle switch.
-        const modeToggle = document.getElementById("modeToggle");
-        if (modeToggle) {
-            modeToggle.addEventListener("change", () => {
-                if (modeToggle.checked) {
-                    document.documentElement.setAttribute("data-theme", "dark");
-                    localStorage.setItem("theme", "dark"); // Save theme preference.
-                } else {
-                    document.documentElement.setAttribute("data-theme", "light");
-                    localStorage.setItem("theme", "light"); // Save theme preference.
-                }
-            });
-        }
-
-        // NEW: Event listener for the logout button
-        const logoutButton = document.getElementById('logoutButton');
-        if (logoutButton) {
-            logoutButton.addEventListener('click', logout);
-        }
-    });
-</script>
-
+    </script>
 </body>
 </html>
