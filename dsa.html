@@ -12,7 +12,7 @@
             --light: #f7f7f7;
             --dark: #484848;
             --card-bg: #fff;
-            --border-color: #eee; /* Added for subtle borders */
+            --border-color: #eee;
 
             --bg-color: var(--light);
             --text-color: var(--primary);
@@ -32,10 +32,9 @@
             --card-bg: #1f1f1f;
             --accent: #ff385c;
             --dark: #ddd;
-            --border-color: #333; /* Dark theme border color */
+            --border-color: #333;
         }
 
-        /* Universal box-sizing */
         * {
             box-sizing: border-box;
         }
@@ -134,7 +133,6 @@
             border-color: #e0224d;
         }
 
-        /* Toggle Switch */
         .toggle-switch {
             position: relative;
             width: 55px;
@@ -177,7 +175,6 @@
             transform: translateX(27px);
         }
 
-        /* Logout button */
         #logoutButton {
             background-color: var(--accent);
             color: white;
@@ -200,7 +197,6 @@
             transform: translateY(0);
         }
 
-        /* Page Title */
         h1 {
             font-size: 2.6em;
             margin-bottom: 40px;
@@ -208,7 +204,6 @@
             text-align: center;
         }
 
-        /* Sections */
         section {
             width: 100%;
             max-width: 1200px;
@@ -230,53 +225,21 @@
             font-weight: 600;
         }
 
-        .video-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-
-        .video-wrapper {
-            background-color: var(--card-bg);
-            border-radius: 16px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
-            overflow: hidden;
-            transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            flex-direction: column;
-            border: 1px solid var(--border-color);
-        }
-
-        .video-wrapper:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
-        }
-
-        iframe {
-            width: 100%;
-            aspect-ratio: 16 / 9;
+        .button {
+            background-color: var(--accent);
+            color: white;
             border: none;
-            display: block;
-            border-radius: 16px 16px 0 0;
-            background: black;
+            padding: 15px 25px;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
-        .video-link {
-            text-align: center;
-            padding: 15px 10px;
-            font-weight: 600;
-            font-size: 1rem;
-            color: var(--accent);
-            text-decoration: none;
-            border-bottom: 1px solid var(--border-color);
-            transition: color 0.3s ease;
+        .button:hover {
+            background-color: #e0224d;
         }
 
-        .video-link:hover {
-            color: #e0224d;
-        }
-
-        /* Footer */
         .footer {
             margin-top: auto;
             font-size: 0.9em;
@@ -285,6 +248,7 @@
             padding: 20px 0 10px;
             width: 100%;
         }
+
     </style>
 </head>
 <body>
@@ -298,10 +262,10 @@
             <a href="index.html#ee">EE</a>
             <a href="index.html#os">OS</a>
             <a href="index.html#se">SE</a>
-            <a href="dsa.html">DSA</a> <!-- Link to DSA page -->
+            <a href="dsa.html">DSA</a>
         </div>
         <div class="nav-search">
-            <input type="search" id="searchInput" placeholder="Search DSA problems..." aria-label="Search DSA problems" />
+            <input type="search" id="searchInput" placeholder="Search DSA..." aria-label="Search DSA problems" />
         </div>
         <label class="toggle-switch" title="Toggle dark mode">
             <input type="checkbox" id="modeToggle" aria-label="Toggle dark mode" />
@@ -312,37 +276,46 @@
 
     <h1>DSA - Data Structures & Algorithms</h1>
 
-    <section id="dsaSection">
-        <h2>DSA Problems</h2>
-        <div class="video-list" id="dsaList"></div>
+    <section id="dsaSection" class="active">
+        <h2>Welcome to the DSA Section!</h2>
+        <p>Access the SDE Sheet and apply for job opportunities!</p>
+        
+        <!-- SDE Sheet Link -->
+        <div>
+            <a href="https://www.some-sde-sheet-link.com" target="_blank" class="button">Access SDE Sheet</a>
+        </div>
+
+        <!-- Apply Job Link -->
+        <div style="margin-top: 20px;">
+            <a href="apply-job.html" target="_blank" class="button">Apply for Job</a>
+        </div>
     </section>
 
     <!-- Footer -->
     <div class="footer">© 2025 BhaiChara Pvt Ltd. All rights reserved.</div>
 
     <script>
-        // Example of how to render DSA problems (add actual DSA topics and videos)
-        function renderDSAVideos() {
-            const dsaListContainer = document.getElementById('dsaList');
-            const dsaTopics = [
-                { title: "Array", videoUrl: "https://www.youtube.com/embed/xxxxxxx" },
-                { title: "Linked List", videoUrl: "https://www.youtube.com/embed/xxxxxxx" },
-                { title: "Stacks", videoUrl: "https://www.youtube.com/embed/xxxxxxx" },
-                { title: "Queues", videoUrl: "https://www.youtube.com/embed/xxxxxxx" }
-            ];
+        // Dark mode toggle functionality
+        document.addEventListener("DOMContentLoaded", () => {
+            const toggle = document.getElementById("modeToggle");
+            const savedTheme = localStorage.getItem("theme");
 
-            dsaTopics.forEach(topic => {
-                const videoEl = document.createElement('div');
-                videoEl.className = 'video-wrapper';
-                videoEl.innerHTML = `
-                    <iframe src="${topic.videoUrl}" allowfullscreen loading="lazy"></iframe>
-                    <a href="${topic.videoUrl}" target="_blank" class="video-link">${topic.title}</a>
-                `;
-                dsaListContainer.appendChild(videoEl);
+            if (savedTheme) {
+                document.documentElement.setAttribute("data-theme", savedTheme);
+                toggle.checked = savedTheme === "dark";
+            } else {
+                const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+                document.documentElement.setAttribute("data-theme", prefersDark ? "dark" : "light");
+                toggle.checked = prefersDark;
+            }
+
+            // Toggle the dark/light mode and store it
+            toggle.addEventListener("change", () => {
+                const theme = toggle.checked ? "dark" : "light";
+                document.documentElement.setAttribute("data-theme", theme);
+                localStorage.setItem("theme", theme);
             });
-        }
-
-        renderDSAVideos(); // Call function to render DSA videos
+        });
     </script>
 </body>
 </html>
