@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DSA - BhaiChara</title>
+    <style>
+        /* Include your existing CSS or specific styles for the DSA page */
+        :root {
+            --primary: #2c3e50;
+            --accent: #ff385c;
+            --light: #f7f7f7;
+            --dark: #484848;
+            --card-bg: #fff;
+            --border-color: #eee;
+            --bg-color: var(--light);
+            --text-color: var(--primary);
+            --nav-bg: #fff;
+            --nav-text: var(--primary);
+            --search-border: var(--accent);
+            --search-shadow: rgba(255, 56, 92, 0.3);
+        }
+        body {
+            font-family: 'Helvetica Neue', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0 20px 40px;
+        }
+        nav {
+            width: 100%;
+            max-width: 1200px;
+            background-color: var(--nav-bg);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 25px;
+            margin-bottom: 40px;
+            border-radius: 12px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+        }
+        .nav-links a {
+            color: var(--nav-text);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+            padding: 5px 0;
+        }
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+        h1 {
+            font-size: 2.6em;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        section {
+            width: 100%;
+            max-width: 1200px;
+            margin-bottom: 60px;
+        }
+        .video-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        .video-wrapper {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+            overflow: hidden;
+        }
+        iframe {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border: none;
+        }
+        .job-form {
+            margin-bottom: 20px;
+        }
+        .job-opening {
+            background-color: var(--card-bg);
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 10px;
+        }
+        .applyBtn {
+            background-color: var(--accent);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation bar -->
+    <nav>
+        <a href="index.html" class="nav-title">BHAICHARA ON TOP</a>
+        <div class="nav-links">
+            <a href="index.html#cd">CD</a>
+            <a href="index.html#cn">CN</a>
+            <a href="index.html#daa">DAA</a>
+            <a href="index.html#ee">EE</a>
+            <a href="index.html#os">OS</a>
+            <a href="index.html#se">SE</a>
+            <a href="dsa.html">DSA</a>
+        </div>
+    </nav>
+
+    <h1>DSA - Data Structures & Algorithms</h1>
+
+    <section id="dsaSection">
+        <h2>DSA Problems</h2>
+        <div class="video-list" id="dsaList"></div>
+
+        <h2>Job Openings</h2>
+        <div class="job-form">
+            <form id="jobForm">
+                <label for="jobTitle">Job Title:</label>
+                <input type="text" id="jobTitle" placeholder="Enter job title" required />
+                
+                <label for="jobDescription">Job Description:</label>
+                <textarea id="jobDescription" placeholder="Enter job description" required></textarea>
+
+                <label for="company">Company:</label>
+                <input type="text" id="company" placeholder="Enter company name" required />
+
+                <button type="submit">Add Job Opening</button>
+            </form>
+        </div>
+        <div id="jobList"></div>
+    </section>
+
+    <script>
+        let jobOpenings = [];
+
+        // Display Job Openings
+        function displayJobOpenings() {
+            const jobListContainer = document.getElementById('jobList');
+            jobListContainer.innerHTML = ''; // Clear previous jobs
+
+            jobOpenings.forEach((job, index) => {
+                const jobEl = document.createElement('div');
+                jobEl.className = 'job-opening';
+                jobEl.innerHTML = `
+                    <h3>${job.title}</h3>
+                    <p><strong>Company:</strong> ${job.company}</p>
+                    <p>${job.description}</p>
+                    <button class="applyBtn" data-index="${index}">Apply</button>
+                `;
+                jobListContainer.appendChild(jobEl);
+            });
+        }
+
+        // Add job opening
+        document.getElementById('jobForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const title = document.getElementById('jobTitle').value;
+            const description = document.getElementById('jobDescription').value;
+            const company = document.getElementById('company').value;
+
+            jobOpenings.push({ title, description, company });
+            displayJobOpenings();
+            e.target.reset();
+        });
+
+        // Apply for job (you can add more advanced logic here)
+        document.getElementById('jobList').addEventListener('click', function (e) {
+            if (e.target && e.target.classList.contains('applyBtn')) {
+                const index = e.target.dataset.index;
+                alert(`Applied for job: ${jobOpenings[index].title}`);
+            }
+        });
+
+        // Example of how to render DSA videos (add actual DSA topics and videos)
+        function renderDSAVideos() {
+            const dsaListContainer = document.getElementById('dsaList');
+            const dsaTopics = [
+                { title: "Array", videoUrl: "https://www.youtube.com/embed/xxxxxxx" },
+                { title: "Linked List", videoUrl: "https://www.youtube.com/embed/xxxxxxx" },
+                { title: "Stacks", videoUrl: "https://www.youtube.com/embed/xxxxxxx" },
+                { title: "Queues", videoUrl: "https://www.youtube.com/embed/xxxxxxx" }
+            ];
+
+            dsaTopics.forEach(topic => {
+                const videoEl = document.createElement('div');
+                videoEl.className = 'video-wrapper';
+                videoEl.innerHTML = `
+                    <iframe src="${topic.videoUrl}" allowfullscreen loading="lazy"></iframe>
+                    <a href="${topic.videoUrl}" target="_blank" class="video-link">${topic.title}</a>
+                `;
+                dsaListContainer.appendChild(videoEl);
+            });
+        }
+
+        // Call function to render videos
+        renderDSAVideos();
+    </script>
+</body>
+</html>
