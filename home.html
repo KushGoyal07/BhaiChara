@@ -342,6 +342,7 @@
             <a href="#ee">EE</a>
             <a href="#os">OS</a>
             <a href="#se">SE</a>
+            <a href="dsa.html">DSA</a> <!-- Link to DSA page -->
         </div>
         <div class="nav-search">
             <input type="search" id="searchInput" placeholder="Search videos by name..." aria-label="Search videos by name" />
@@ -402,7 +403,6 @@
 
     <script>
         // Data for videos, each has a `completed` boolean property to track completion.
-        // The `videoUrl` now directly contains the YouTube embed URL.
         const sectionsData = {
             se: [
                 { title: "JAVA UNIT - 1", videoUrl: "https://www.youtube.com/embed/4RJT4v0SRDU", completed: false,
@@ -427,39 +427,27 @@
             'se': { id: 'seSection', dataKey: 'se', title: 'SE Videos' }
         };
 
-        /**
-         * Renders videos for a specific section into its corresponding container.
-         * @param {string} sectionKey - The key from `sectionsData` (e.g., 'pslp', 'cns').
-         */
+        // Function to render videos for each section dynamically
         function renderVideos(sectionKey) {
-            // Do not render videos for the 'home' section as it's a summary page.
             if (!sectionKey || sectionKey === 'home') return;
 
             const videos = sectionsData[sectionKey];
             const container = document.getElementById(sectionKey + "List");
 
-            // Ensure container and video data exist before proceeding.
             if (!container || !videos) {
                 console.error(`Container or video data not found for section: ${sectionKey}`);
                 return;
             }
 
-            // Clear existing videos to prevent duplicates on re-render.
             container.innerHTML = "";
 
-            // Iterate over videos and create HTML elements for each.
             videos.forEach((video, i) => {
                 const videoEl = document.createElement("div");
                 videoEl.className = "video-wrapper";
-                videoEl.dataset.title = video.title.toLowerCase(); // Store title for search filtering
+                videoEl.dataset.title = video.title.toLowerCase();
 
                 videoEl.innerHTML = `
-                    <iframe
-                        src="${video.videoUrl}"
-                        allowfullscreen
-                        loading="lazy"
-                        title="${video.title}"
-                    ></iframe>
+                    <iframe src="${video.videoUrl}" allowfullscreen loading="lazy" title="${video.title}"></iframe>
                     <a href="${video.videoUrl}" target="_blank" rel="noopener" class="video-link">${video.title}</a>
                     <div class="notes-container">
                         <div class="notes-title">Notes:</div>
@@ -475,35 +463,28 @@
             });
         }
 
-        /**
-         * Filters videos in the currently active section based on a search term.
-         * @param {string} searchTerm - The text to search for in video titles.
-         */
+        // Filter videos based on search input
         function filterVideos(searchTerm) {
             const term = searchTerm.toLowerCase();
             const currentHash = window.location.hash.substring(1) || 'home';
             const currentRoute = routeMap[currentHash];
 
-            // Only filter if we are on a section that displays videos.
             if (currentRoute && currentRoute.dataKey) {
                 const container = document.getElementById(currentRoute.dataKey + "List");
                 if (container) {
                     Array.from(container.children).forEach(videoEl => {
                         const title = videoEl.dataset.title || "";
-                        // Show/hide video element based on search term inclusion.
                         videoEl.style.display = title.includes(term) ? "block" : "none";
                     });
                 }
             }
         }
 
-        /**
-         * Calculates and updates the completion statistics and progress bars for all courses.
-         */
+        // Update completion stats for all courses
         function updateCompletionStats() {
             const completionContainer = document.getElementById("completionStats");
-            if (!completionContainer) return; // Exit if container not found
-            completionContainer.innerHTML = ""; // Clear previous stats
+            if (!completionContainer) return;
+            completionContainer.innerHTML = "";
 
             for (const [key, videos] of Object.entries(sectionsData)) {
                 const completedCount = videos.filter(v => v.completed).length;
@@ -525,25 +506,19 @@
             }
         }
 
-        /**
-         * Saves the current completion state of all videos to localStorage.
-         */
+        // Save completed status to localStorage
         function saveCompleted() {
             localStorage.setItem("videoCompletion", JSON.stringify(sectionsData));
         }
 
-        /**
-         * Loads the completion state from localStorage and updates `sectionsData`.
-         */
+        // Load completion status from localStorage
         function loadCompleted() {
             const saved = localStorage.getItem("videoCompletion");
             if (saved) {
                 const savedData = JSON.parse(saved);
-                // Iterate through saved data and apply it to the `sectionsData`.
                 for (const [key, videos] of Object.entries(savedData)) {
-                    if (sectionsData[key]) { // Check if the section key exists in our data
+                    if (sectionsData[key]) {
                         sectionsData[key].forEach((video, i) => {
-                            // Ensure the saved data has a boolean 'completed' property for the video at this index.
                             if (typeof videos[i]?.completed === "boolean") {
                                 video.completed = videos[i].completed;
                             }
@@ -553,9 +528,7 @@
             }
         }
 
-        /**
-         * Initializes the theme (dark/light mode) based on localStorage or system preference.
-         */
+        // Initialize dark/light mode
         function initTheme() {
             const toggle = document.getElementById("modeToggle");
             const savedTheme = localStorage.getItem("theme");
@@ -564,48 +537,37 @@
                 document.documentElement.setAttribute("data-theme", savedTheme);
                 toggle.checked = savedTheme === "dark";
             } else {
-                // Default to system preference if no theme is saved.
                 const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
                 document.documentElement.setAttribute("data-theme", prefersDark ? "dark" : "light");
                 toggle.checked = prefersDark;
             }
         }
 
-        /**
-         * Handles client-side routing based on the URL hash.
-         * Shows the relevant section and updates the page title.
-         */
+        // Handle routing based on URL hash
         function handleRouting() {
-            const hash = window.location.hash.substring(1); // Get hash without '#'
-            const routeName = hash || 'home'; // Default to 'home' if no hash is present
+            const hash = window.location.hash.substring(1);
+            const routeName = hash || 'home';
 
-            // Hide all sections first.
             document.querySelectorAll('section').forEach(section => {
                 section.classList.remove('active');
             });
 
-            // Find the target route in our map.
             const targetRoute = routeMap[routeName];
             const pageTitleElement = document.getElementById('pageTitle');
 
             if (targetRoute) {
-                // Show the active section.
                 document.getElementById(targetRoute.id).classList.add('active');
-                // Update the main page title.
                 if (pageTitleElement) {
                     pageTitleElement.textContent = targetRoute.title;
                 }
 
-                // If the route corresponds to a video section, render its videos.
                 if (targetRoute.dataKey) {
                     renderVideos(targetRoute.dataKey);
-                    // Clear search input and re-filter for the newly active section.
                     const searchInput = document.getElementById("searchInput");
                     if (searchInput) searchInput.value = '';
                     filterVideos('');
                 }
             } else {
-                // If an invalid hash, redirect to home page.
                 window.location.hash = '#home';
                 if (pageTitleElement) {
                     pageTitleElement.textContent = routeMap['home'].title;
@@ -615,31 +577,25 @@
 
         // NEW: Logout Function
         function logout() {
-            localStorage.removeItem('isAuthenticated'); // Remove the authentication flag
-            window.location.href = 'index.html'; // Redirect to the login page
+            localStorage.removeItem('isAuthenticated');
+            window.location.href = 'index.html';
         }
 
-        // Event Listeners Setup - executed once the DOM is fully loaded.
+        // Event listeners and setup
         document.addEventListener("DOMContentLoaded", () => {
-            // Check authentication status FIRST
             const isAuthenticated = localStorage.getItem('isAuthenticated');
             if (isAuthenticated !== 'true') {
-                // If not authenticated, redirect to the login page
                 window.location.href = 'index.html';
-                return; // Stop further execution of this script
+                return;
             }
 
-            loadCompleted(); // Load completion data from localStorage.
-            updateCompletionStats(); // Update progress bars and stats.
-            initTheme(); // Set initial dark/light mode.
-
-            // Handle initial routing when the page loads (e.g., if a user loads with #pslp).
+            loadCompleted();
+            updateCompletionStats();
+            initTheme();
             handleRouting();
 
-            // Listen for hash changes in the URL (e.g., when navigation links are clicked).
             window.addEventListener('hashchange', handleRouting);
 
-            // Event listener for the search input.
             const searchInput = document.getElementById("searchInput");
             if (searchInput) {
                 searchInput.addEventListener("input", (e) => {
@@ -647,37 +603,31 @@
                 });
             }
 
-            // Event delegation for handling video completion checkboxes.
             document.body.addEventListener("change", (e) => {
-                // Check if the changed element is a completion checkbox.
                 if (e.target.matches('input[type="checkbox"][data-section][data-index]')) {
                     const section = e.target.dataset.section;
                     const index = parseInt(e.target.dataset.index);
-
-                    // Update the completion status in our data model.
                     if (sectionsData[section] && sectionsData[section][index]) {
                         sectionsData[section][index].completed = e.target.checked;
-                        saveCompleted(); // Save updated state to localStorage.
-                        updateCompletionStats(); // Re-calculate and display progress.
+                        saveCompleted();
+                        updateCompletionStats();
                     }
                 }
             });
 
-            // Event listener for the dark mode toggle switch.
             const modeToggle = document.getElementById("modeToggle");
             if (modeToggle) {
                 modeToggle.addEventListener("change", () => {
                     if (modeToggle.checked) {
                         document.documentElement.setAttribute("data-theme", "dark");
-                        localStorage.setItem("theme", "dark"); // Save theme preference.
+                        localStorage.setItem("theme", "dark");
                     } else {
                         document.documentElement.setAttribute("data-theme", "light");
-                        localStorage.setItem("theme", "light"); // Save theme preference.
+                        localStorage.setItem("theme", "light");
                     }
                 });
             }
 
-            // NEW: Event listener for the logout button
             const logoutButton = document.getElementById('logoutButton');
             if (logoutButton) {
                 logoutButton.addEventListener('click', logout);
